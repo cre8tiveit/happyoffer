@@ -1,0 +1,17 @@
+<ion-header>
+  <app-header></app-header>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="grid grid-cols-2 gap-5 m-5 mt-10">
+    @for (item of items; track item.title ) {
+    <div
+      (click)="navigate(item.url)"
+      class="flex flex-col justify-center items-center p-5"
+      [ngClass]="item.background"
+    >
+      <img [src]="item.icon" width="" height="" alt="icon" class="w-1/4 my-5" />
+      <div class="font-bold">{{ item.title}}</div>
+    </div>
+    }
+  </div>
+</ion-content>
