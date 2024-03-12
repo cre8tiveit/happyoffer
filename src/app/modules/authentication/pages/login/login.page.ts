@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['login.page.scss'],
 })
 export class LoginPage {
+  public loginForm: any;
+
   constructor() {}
+
+  public login(): void {
+    console.log('login');
+  }
 }

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { HomePage } from './pages/home/home.page';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { LoginPage } from './pages/login/login.page';
 
-const routes: Routes = [{ path: '', component: HomePage }];
+const routes: Routes = [{ path: '', component: LoginPage }];
 
 @NgModule({
   imports: [
@@ -14,8 +14,9 @@ const routes: Routes = [{ path: '', component: HomePage }];
     FormsModule,
     IonicModule,
     SharedModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
-  declarations: [HomePage],
+  declarations: [LoginPage],
 })
-export class HomePageModule {}
+export class AuthenticationModule {}

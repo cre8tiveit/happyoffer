@@ -1,3 +1,17 @@
-<div class="bg-primary text-black h-16 flex justify-center items-center">
-  Happyoffer
+<div class="bg-primary text-black h-16 grid grid-cols-3">
+  <div class="flex justify-center items-center w-16">
+    @if (showHomeButton){
+    <ion-button fill="clear" (click)="goHome()">
+      <img
+        src="assets/images/home.svg"
+        alt="home"
+        width=""
+        height=""
+        class="h-5"
+      />
+    </ion-button>
+    }
+  </div>
+  <div class="flex justify-center items-center">Happyoffer</div>
+  <div></div>
 </div>

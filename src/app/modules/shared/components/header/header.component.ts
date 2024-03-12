@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent  implements OnInit {
+export class HeaderComponent {
+  @Input()
+  public showHomeButton: boolean = false;
 
-  constructor() { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {}
-
+  public goHome(): void {
+    this.router.navigate(['/home']);
+  }
 }
