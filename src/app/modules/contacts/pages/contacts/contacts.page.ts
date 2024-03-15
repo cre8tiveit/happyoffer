@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class ContactsPage {
   constructor() {}
+
+  public ionViewWillEnter() {
+    console.log('enter');
+  }
+
+  public search($event: any) {}
 }

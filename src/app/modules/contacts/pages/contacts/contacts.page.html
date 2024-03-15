@@ -1,4 +1,20 @@
 <ion-header>
   <app-header [showHomeButton]="true"></app-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button href="/home" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Contacts</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-searchbar
+    (ionInput)="search($event)"
+    placeholder="search clients"
+  ></ion-searchbar>
 </ion-header>
 <ion-content [fullscreen]="true"> contacts </ion-content>

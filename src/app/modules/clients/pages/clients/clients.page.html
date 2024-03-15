@@ -1,4 +1,25 @@
 <ion-header>
   <app-header [showHomeButton]="true"></app-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button href="/home" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Clients</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addClient()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
 </ion-header>
-<ion-content [fullscreen]="true"> clients </ion-content>
+<ion-content [fullscreen]="true">
+  <ion-list>
+    @for (company of filterdCompanies; track company.id) {
+    <ion-item (click)="showCompanyDetails(company)" detail>
+      <ion-label>{{company.name}}</ion-label>
+    </ion-item>
+    }
+  </ion-list>
+</ion-content>

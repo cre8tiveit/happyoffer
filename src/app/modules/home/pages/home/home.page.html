@@ -7,7 +7,7 @@
     <div
       (click)="navigate(item.url)"
       class="flex flex-col justify-center items-center p-5"
-      [ngClass]="item.background"
+      [ngClass]="item.classes"
     >
       <img [src]="item.icon" width="" height="" alt="icon" class="w-1/4 my-5" />
       <div class="font-bold">{{ item.title}}</div>

@@ -1,4 +1,34 @@
 <ion-header>
   <app-header [showHomeButton]="true"></app-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button href="/home" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Offers</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-searchbar
+    (ionInput)="search($event)"
+    placeholder="search offers"
+  ></ion-searchbar>
 </ion-header>
-<ion-content [fullscreen]="true"> offers </ion-content>
+<ion-content [fullscreen]="true">
+  <ion-list>
+    @for ( offer of offers; track offer.id) {
+    <div
+      class="mb-5 px-5 py-2 even:bg-gray-200"
+      (click)="showDetails(offer.id)"
+    >
+      <div>{{ offer.number }} | {{ offer.client }}</div>
+      <div class="font-bold">{{ offer.name }}</div>
+      <div>{{ offer.nameContactPerson }}</div>
+      <div>Offer made at {{ offer.created | date:"dd-MM-yyyy"}}</div>
+    </div>
+    }
+  </ion-list>
+</ion-content>

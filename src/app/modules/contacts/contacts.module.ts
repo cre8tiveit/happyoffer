@@ -5,8 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { ContactsPage } from './pages/contacts/contacts.page';
+import { ContactPage } from './pages/contact/contact.page';
 
-const routes: Routes = [{ path: '', component: ContactsPage }];
+const routes: Routes = [
+  { path: '', component: ContactsPage },
+  { path: ':id', component: ContactPage },
+];
 
 @NgModule({
   imports: [
@@ -16,6 +20,6 @@ const routes: Routes = [{ path: '', component: ContactsPage }];
     SharedModule,
     RouterModule.forChild(routes),
   ],
-  declarations: [ContactsPage],
+  declarations: [ContactsPage, ContactPage],
 })
 export class ContactsPageModule {}
