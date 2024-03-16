@@ -1,17 +1,23 @@
 <ion-header>
-  <app-header [showHomeButton]="true"></app-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button href="/home" text=""></ion-back-button>
-    </ion-buttons>
-
-    <ion-title>Clients</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="addClient()">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-buttons slot="start"> </ion-buttons>
+    <ion-title>Happyoffer</ion-title>
+    <ion-buttons slot="end"><ng-content></ng-content></ion-buttons>
   </ion-toolbar>
+
+  <div class="bg-white py-3 px-3 border-b-black border-b-2">
+    <div class="flex items-center">
+      <ion-buttons slot="start">
+        <ion-back-button
+          text=""
+          icon="arrow-back-circle-outline"
+          class="text-black ml-3"
+        ></ion-back-button>
+      </ion-buttons>
+      <div class="ml-5 font-bold">Clients</div>
+    </div>
+  </div>
+
   <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
 </ion-header>
 <ion-content [fullscreen]="true">

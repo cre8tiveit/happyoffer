@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { OfferState } from './core/stores/offer/offer.state';
+import { NgIconsModule } from '@ng-icons/core';
+import { heroUsers } from '@ng-icons/heroicons/outline';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +19,7 @@ import { OfferState } from './core/stores/offer/offer.state';
     NgxsModule.forRoot([OfferState], {
       developmentMode: !environment.production,
     }),
+    NgIconsModule.withIcons({ heroUsers }),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

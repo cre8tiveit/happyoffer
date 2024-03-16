@@ -5,6 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './pages/home/home.page';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { NgIconsModule } from '@ng-icons/core';
+import {
+  heroUsers,
+  heroUser,
+  heroUserGroup,
+  heroDocumentText,
+  heroBellAlert,
+  heroCog6Tooth,
+} from '@ng-icons/heroicons/outline';
 
 const routes: Routes = [{ path: '', component: HomePage }];
 
@@ -14,6 +23,14 @@ const routes: Routes = [{ path: '', component: HomePage }];
     FormsModule,
     IonicModule,
     SharedModule,
+    NgIconsModule.withIcons({
+      heroUsers,
+      heroUser,
+      heroUserGroup,
+      heroDocumentText,
+      heroBellAlert,
+      heroCog6Tooth,
+    }),
     RouterModule.forChild(routes),
   ],
   declarations: [HomePage],

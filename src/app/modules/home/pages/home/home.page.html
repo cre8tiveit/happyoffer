@@ -1,5 +1,9 @@
 <ion-header>
-  <app-header></app-header>
+  <div
+    class="bg-primary text-black flex justify-center items-center pt-16 py-4"
+  >
+    <img src="assets/images/happyoffer.svg" class="w-5/12" />
+  </div>
 </ion-header>
 <ion-content [fullscreen]="true">
   <div class="grid grid-cols-2 gap-5 m-5 mt-10">
@@ -9,7 +13,7 @@
       class="flex flex-col justify-center items-center p-5"
       [ngClass]="item.classes"
     >
-      <img [src]="item.icon" width="" height="" alt="icon" class="w-1/4 my-5" />
+      <ng-icon [name]="item.icon" class="text-6xl"></ng-icon>
       <div class="font-bold">{{ item.title}}</div>
     </div>
     }
