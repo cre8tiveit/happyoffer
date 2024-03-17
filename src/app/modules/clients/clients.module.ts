@@ -6,6 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClientsPage } from './pages/clients/clients.page';
 import { SharedModule } from '../shared/shared.module';
 import { ClientPage } from './pages/client/client.page';
+import { heroHomeSolid, heroPlusCircleSolid } from '@ng-icons/heroicons/solid';
+import { NgIconsModule } from '@ng-icons/core';
 
 const routes: Routes = [
   { path: '', component: ClientsPage },
@@ -21,6 +23,10 @@ const routes: Routes = [
     SharedModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
+    NgIconsModule.withIcons({
+      heroHomeSolid,
+      heroPlusCircleSolid,
+    }),
   ],
   declarations: [ClientsPage, ClientPage],
 })

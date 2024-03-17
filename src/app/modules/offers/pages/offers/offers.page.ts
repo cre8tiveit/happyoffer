@@ -43,5 +43,9 @@ export class OffersPage {
     this.router.navigate([`/offers/${id}`]);
   }
 
+  public goHome(): void {
+    this.router.navigate(['/home']);
+  }
+
   public search($event: any) {}
 }

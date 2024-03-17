@@ -30,4 +30,7 @@ export class ClientPage implements OnInit {
   public onSubmit() {
     console.log(this.myForm.value);
   }
+  public goHome(): void {
+    this.router.navigate(['/home']);
+  }
 }

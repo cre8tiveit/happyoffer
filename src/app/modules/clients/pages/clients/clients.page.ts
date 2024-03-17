@@ -34,4 +34,8 @@ export class ClientsPage {
     console.log('Add client');
     this.router.navigate(['clients/add']);
   }
+
+  public goHome(): void {
+    this.router.navigate(['/home']);
+  }
 }

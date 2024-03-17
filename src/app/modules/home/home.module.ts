@@ -13,6 +13,7 @@ import {
   heroDocumentText,
   heroBellAlert,
   heroCog6Tooth,
+  heroHome,
 } from '@ng-icons/heroicons/outline';
 
 const routes: Routes = [{ path: '', component: HomePage }];
@@ -30,6 +31,7 @@ const routes: Routes = [{ path: '', component: HomePage }];
       heroDocumentText,
       heroBellAlert,
       heroCog6Tooth,
+      heroHome,
     }),
     RouterModule.forChild(routes),
   ],

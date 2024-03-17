@@ -1,20 +1,38 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start"> </ion-buttons>
+    <ion-buttons slot="start">
+      <div class="w-3"></div>
+      <ion-button>
+        <ng-icon
+          name="heroHomeSolid"
+          class="text-2xl text-black"
+          (click)="goHome()"
+        ></ng-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Happyoffer</ion-title>
-    <ion-buttons slot="end"><ng-content></ng-content></ion-buttons>
   </ion-toolbar>
 
   <div class="bg-white py-3 px-3 border-b-black border-b-2">
-    <div class="flex items-center">
-      <ion-buttons slot="start">
-        <ion-back-button
-          text=""
-          icon="arrow-back-circle-outline"
-          class="text-black ml-3"
-        ></ion-back-button>
-      </ion-buttons>
-      <div class="ml-5 font-bold">Clients</div>
+    <div class="grid grid-cols-2 items-center">
+      <div class="flex items-center">
+        <ion-buttons>
+          <ion-back-button
+            text=""
+            icon="arrow-back-circle-outline"
+            class="text-black ml-3"
+          ></ion-back-button>
+        </ion-buttons>
+        <div class="ml-5 font-bold">Clients</div>
+      </div>
+      <div class="flex justify-end">
+        <ion-buttons>
+          <ng-icon
+            name="heroPlusCircleSolid"
+            class="text-2xl text-secondary"
+          ></ng-icon>
+        </ion-buttons>
+      </div>
     </div>
   </div>
 

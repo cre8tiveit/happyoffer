@@ -42,7 +42,7 @@ export class HomePage implements OnInit {
     },
     {
       title: 'Settings',
-      background: 'bg-secondary',
+      background: 'bg-tertiary',
       activeBackground: 'bg-red-500',
       icon: 'heroCog6Tooth',
       url: '/settings',

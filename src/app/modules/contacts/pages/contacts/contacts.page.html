@@ -1,17 +1,42 @@
 <ion-header>
-  <app-header [showHomeButton]="true"></app-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button href="/home" text=""></ion-back-button>
-    </ion-buttons>
-
-    <ion-title>Contacts</ion-title>
-    <ion-buttons slot="end">
+      <div class="w-3"></div>
       <ion-button>
-        <ion-icon slot="icon-only" name="add"></ion-icon>
+        <ng-icon
+          name="heroHomeSolid"
+          class="text-2xl text-black"
+          (click)="goHome()"
+        ></ng-icon>
       </ion-button>
     </ion-buttons>
+    <ion-title>Happyoffer</ion-title>
   </ion-toolbar>
+
+  <div class="bg-white py-3 px-3 border-b-black border-b-2">
+    <div class="grid grid-cols-2 items-center">
+      <div class="flex items-center">
+        <ion-buttons>
+          <ion-back-button
+            text=""
+            icon="arrow-back-circle-outline"
+            class="text-black ml-3"
+          ></ion-back-button>
+        </ion-buttons>
+
+        <div class="ml-5 font-bold">Contacts</div>
+      </div>
+      <div class="flex justify-end">
+        <ion-buttons>
+          <ng-icon
+            name="heroPlusCircleSolid"
+            class="text-2xl text-secondary"
+          ></ng-icon>
+        </ion-buttons>
+      </div>
+    </div>
+  </div>
+
   <ion-searchbar
     (ionInput)="search($event)"
     placeholder="search clients"
