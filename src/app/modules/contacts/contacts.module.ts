@@ -8,9 +8,10 @@ import { ContactsPage } from './pages/contacts/contacts.page';
 import { ContactPage } from './pages/contact/contact.page';
 import { heroHomeSolid, heroPlusCircleSolid } from '@ng-icons/heroicons/solid';
 import { NgIconsModule } from '@ng-icons/core';
+import { ClientsPage } from './pages/clients/clients.page';
 
 const routes: Routes = [
-  { path: '', component: ContactsPage },
+  { path: '', component: ClientsPage },
   { path: ':id', component: ContactPage },
 ];
 
@@ -26,6 +27,6 @@ const routes: Routes = [
       heroPlusCircleSolid,
     }),
   ],
-  declarations: [ContactsPage, ContactPage],
+  declarations: [ContactsPage, ContactPage, ClientsPage],
 })
 export class ContactsPageModule {}

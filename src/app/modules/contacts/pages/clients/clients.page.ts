@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-contacts',
-  templateUrl: 'contacts.page.html',
-  styleUrls: ['contacts.page.scss'],
+  selector: 'app-clients',
+  templateUrl: 'clients.page.html',
+  styleUrls: ['clients.page.scss'],
 })
-export class ContactsPage {
+export class ClientsPage {
   constructor(private readonly router: Router) {}
 
   public clients = [
