@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { ContactsPage } from './pages/contacts/contacts.page';
@@ -12,7 +12,9 @@ import { ClientsPage } from './pages/clients/clients.page';
 
 const routes: Routes = [
   { path: '', component: ClientsPage },
-  { path: ':id', component: ContactPage },
+  { path: 'client/:id', component: ContactsPage },
+  { path: 'client/contact/:id', component: ContactPage },
+  { path: 'client/contact/add', component: ContactPage },
 ];
 
 @NgModule({
@@ -21,6 +23,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     SharedModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     NgIconsModule.withIcons({
       heroHomeSolid,

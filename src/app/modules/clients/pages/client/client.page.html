@@ -28,51 +28,87 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="mx-5">
-    <div>
-      <ion-input label="name" id="name" type="text" formControlName="name" />
-    </div>
-
-    <div>
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
       <ion-input
-        label="street"
-        id="street"
+        label="Client name"
+        id="name"
         type="text"
-        formControlName="street"
+        formControlName="name"
       />
     </div>
 
-    <div>
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
       <ion-input
-        label="postal code"
-        id="postal code"
+        label="Zip code"
+        id="Zipcode"
         type="text"
-        formControlName="postalCode"
+        formControlName="zipcode"
       />
     </div>
 
-    <div>
-      <ion-input label="city" id="city" type="text" formControlName="city" />
-    </div>
-
-    <div>
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
       <ion-input
-        label="country"
-        id="country"
-        type="text"
-        formControlName="country"
-      />
-    </div>
-
-    <div>
-      <ion-input
-        label="adress"
+        label="Adress"
         id="address"
         type="text"
         formControlName="address"
       />
     </div>
 
-    <div class="mt-10">
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-input
+        label="Number"
+        id="number"
+        type="text"
+        formControlName="number"
+      />
+    </div>
+
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-input
+        label="Country"
+        id="country"
+        type="text"
+        formControlName="country"
+      />
+    </div>
+
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-input label="City" id="city" type="text" formControlName="city" />
+    </div>
+
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-input label="Email" id="email" type="text" formControlName="email" />
+    </div>
+
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-input
+        label="Chamber of commerce number"
+        id="cocn"
+        type="text"
+        formControlName="cocn"
+      />
+    </div>
+
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-input
+        label="Phone number"
+        id="phonenumber"
+        type="text"
+        formControlName="phonenumber"
+      />
+    </div>
+
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-input
+        label="Website url"
+        id="url"
+        type="text"
+        formControlName="url"
+      />
+    </div>
+
+    <div class="my-10">
       <ion-button type="submit" expand="full" color="secondary"
         >Save</ion-button
       >

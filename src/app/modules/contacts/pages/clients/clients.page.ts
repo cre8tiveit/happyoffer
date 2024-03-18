@@ -12,18 +12,26 @@ export class ClientsPage {
   public clients = [
     {
       id: 1,
-      companyName: 'Mc Donalds',
+      name: 'Mc Donalds',
     },
     {
       id: 2,
-      companyName: 'KFC',
+      name: 'KFC',
     },
     {
       id: 3,
-      companyName: 'Wendy',
+      name: 'Wendy',
     },
   ];
 
+  public filterdClients: any[] = this.clients;
+
+  public search(event: any): void {
+    const query = event.target.value.toLowerCase();
+    this.filterdClients = this.clients.filter((client) =>
+      client.name.toLowerCase().includes(query)
+    );
+  }
   public ionViewWillEnter() {
     console.log('enter');
   }
@@ -32,5 +40,7 @@ export class ClientsPage {
     this.router.navigate(['/home']);
   }
 
-  public search($event: any) {}
+  public goContacts(id: number): void {
+    this.router.navigate([`/contacts/client/${id}`]);
+  }
 }

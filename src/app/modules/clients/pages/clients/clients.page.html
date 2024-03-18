@@ -40,9 +40,9 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <ion-list>
-    @for (company of filterdCompanies; track company.id) {
-    <ion-item (click)="showCompanyDetails(company)" detail>
-      <ion-label>{{company.name}}</ion-label>
+    @for (client of filterdClients; track client.id) {
+    <ion-item (click)="showCompanyDetails(client)" detail>
+      <ion-label>{{client.name}}</ion-label>
     </ion-item>
     }
   </ion-list>

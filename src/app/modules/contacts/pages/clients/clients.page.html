@@ -26,14 +26,6 @@
 
         <div class="ml-5 font-bold">Clients</div>
       </div>
-      <div class="flex justify-end">
-        <ion-buttons>
-          <ng-icon
-            name="heroPlusCircleSolid"
-            class="text-2xl text-secondary"
-          ></ng-icon>
-        </ion-buttons>
-      </div>
     </div>
   </div>
 
@@ -44,8 +36,10 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <ion-list>
-    @for (client of clients; track client.id) {
-    <ion-item detail><ion-label>{{client.companyName}}</ion-label></ion-item>
+    @for (client of filterdClients; track client.id) {
+    <ion-item detail (click)="goContacts(client.id)"
+      ><ion-label>{{client.name}}</ion-label></ion-item
+    >
     }
   </ion-list>
 </ion-content>

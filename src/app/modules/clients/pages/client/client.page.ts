@@ -17,9 +17,14 @@ export class ClientPage implements OnInit {
       name: [''],
       address: [''],
       street: [''],
-      postalCode: [''],
+      zipcode: [''],
       city: [''],
       country: [''],
+      email: [''],
+      cocn: [''],
+      phonenumber: [''],
+      url: [''],
+      number: [''],
     });
   }
   ngOnInit(): void {

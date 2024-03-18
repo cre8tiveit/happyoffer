@@ -1,11 +1,114 @@
 <ion-header>
-  <app-header [showHomeButton]="true"></app-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button href="/home" text=""></ion-back-button>
+      <div class="w-3"></div>
+      <ion-button>
+        <ng-icon
+          name="heroHomeSolid"
+          class="text-2xl text-black"
+          (click)="goHome()"
+        ></ng-icon>
+      </ion-button>
     </ion-buttons>
-
-    <ion-title>Contact</ion-title>
+    <ion-title>Happyoffer</ion-title>
   </ion-toolbar>
+
+  <div class="bg-white py-3 px-3 border-b-black border-b-2">
+    <div class="grid grid-cols-2 items-center">
+      <div class="flex items-center">
+        <ion-buttons>
+          <ion-back-button
+            text=""
+            icon="arrow-back-circle-outline"
+            class="text-black ml-3"
+          ></ion-back-button>
+        </ion-buttons>
+
+        <div class="ml-5 font-bold">{{ title }}</div>
+      </div>
+    </div>
+  </div>
 </ion-header>
-<ion-content [fullscreen]="true"> </ion-content>
+<ion-content [fullscreen]="true">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="mx-5">
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-input
+        label="first name"
+        labelPlacement="floating"
+        id="firstname"
+        type="text"
+        formControlName="firstname"
+      />
+    </div>
+
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-input
+        label="last name"
+        labelPlacement="floating"
+        id="lastname"
+        type="text"
+        formControlName="lastname"
+      />
+    </div>
+
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-input
+        label="phone number"
+        labelPlacement="floating"
+        id="phonenumber"
+        type="text"
+        formControlName="phonenumber"
+      />
+    </div>
+
+    <div
+      class="flex justify-between item-center mt-5 border border-1 border-gray-400 px-2 py-2 rounded-md"
+    >
+      <div class="mt-1">Gender</div>
+      <ion-button id="open-picker" size="small" class="text-black"
+        >Male</ion-button
+      >
+    </div>
+    <ion-picker
+      trigger="open-picker"
+      [columns]="pickerColumns"
+      [buttons]="pickerButtons"
+    ></ion-picker>
+
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-input
+        label="email"
+        labelPlacement="floating"
+        id="email"
+        type="text"
+        formControlName="email"
+      />
+    </div>
+
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-input
+        label="email confirmation"
+        labelPlacement="floating"
+        id="emailconfirmation"
+        type="text"
+        formControlName="emailConfirmation"
+      />
+    </div>
+
+    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+      <ion-textarea
+        label="notes"
+        labelPlacement="floating"
+        id="notes"
+        formControlName="notes"
+        rows="5"
+      />
+    </div>
+
+    <div class="mt-10">
+      <ion-button type="submit" expand="full" color="secondary"
+        >Save</ion-button
+      >
+    </div>
+  </form>
+</ion-content>

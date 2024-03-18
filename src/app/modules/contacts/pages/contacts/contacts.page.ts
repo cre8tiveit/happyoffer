@@ -9,18 +9,14 @@ import { Router } from '@angular/router';
 export class ContactsPage {
   constructor(private readonly router: Router) {}
 
-  public clients = [
+  public contacts = [
     {
       id: 1,
-      companyName: 'Mc Donalds',
+      name: 'Jansen',
     },
     {
       id: 2,
-      companyName: 'KFC',
-    },
-    {
-      id: 3,
-      companyName: 'Wendy',
+      name: 'Jongbloed',
     },
   ];
 
@@ -30,6 +26,14 @@ export class ContactsPage {
 
   public goHome(): void {
     this.router.navigate(['/home']);
+  }
+
+  public goContact(id: number): void {
+    this.router.navigate([`/contacts/client/contact/${id}`]);
+  }
+
+  public add(): void {
+    this.router.navigate([`/contacts/client/contact/add`]);
   }
 
   public search($event: any) {}
