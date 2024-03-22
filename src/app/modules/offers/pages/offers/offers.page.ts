@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { ClientsPage } from '../clients/clients.page';
 
 @Component({
   selector: 'app-offers',
@@ -7,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['offers.page.scss'],
 })
 export class OffersPage {
+  public isFilterVisible = false;
   public offers: any[] = [
     {
       id: 1,
@@ -33,7 +36,10 @@ export class OffersPage {
       created: new Date(),
     },
   ];
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private modalCtrl: ModalController
+  ) {}
 
   public ionViewWillEnter() {
     console.log('enter');
@@ -47,5 +53,17 @@ export class OffersPage {
     this.router.navigate(['/home']);
   }
 
+  public toggleFilter() {
+    this.isFilterVisible = !this.isFilterVisible;
+  }
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: ClientsPage,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+  }
   public search($event: any) {}
 }

@@ -1,41 +1,66 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <div class="w-3"></div>
-      <ion-button>
-        <ng-icon
-          name="heroHomeSolid"
-          class="text-2xl text-black"
-          (click)="goHome()"
-        ></ng-icon>
+    <ion-buttons slot="start"> </ion-buttons>
+    <ion-title>Offers</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleFilter()">
+        <ng-icon name="heroFunnel" class="text-2xl text-black"></ng-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Happyoffer</ion-title>
   </ion-toolbar>
 
-  <div class="bg-white py-3 px-3 border-b-black border-b-2">
-    <div class="grid grid-cols-2 items-center">
-      <div class="flex items-center">
-        <ion-buttons>
-          <ion-back-button
-            text=""
-            icon="arrow-back-circle-outline"
-            class="text-black ml-3"
-          ></ion-back-button>
-        </ion-buttons>
-        <div class="ml-5 font-bold">Offers</div>
-      </div>
-      <div class="flex justify-end">
-        <ion-buttons>
-          <ng-icon name="heroFunnel" class="text-2xl text-black"></ng-icon>
-        </ion-buttons>
-      </div>
+  @if (isFilterVisible) {
+
+  <div class="p-5 w-full absolute bg-white">
+    <div class="flex justify-between items-center">
+      <ion-label class="font-bold">Date from</ion-label>
+      <ion-datetime-button
+        datetime="datetime-from"
+        color="primary"
+      ></ion-datetime-button>
     </div>
+    <div class="mt-5 flex justify-between items-center">
+      <ion-label class="font-bold">Date until</ion-label>
+      <ion-datetime-button datetime="datetime-til"></ion-datetime-button>
+    </div>
+
+    <div class="mt-5 flex justify-between items-center">
+      <ion-label class="font-bold">Clients</ion-label>
+      <ion-button expand="block" size="small" (click)="openModal()"
+        >Open</ion-button
+      >
+    </div>
+    <div class="mt-5 flex flex-col">
+      <ion-label class="font-bold">Status</ion-label>
+      <ion-checkbox class="mt-2">In progress</ion-checkbox>
+      <ion-checkbox class="mt-2">Accepted</ion-checkbox>
+      <ion-checkbox class="mt-2">Rejected</ion-checkbox>
+    </div>
+
+    <div class="mt-5">
+      <ion-button expand="full" color="secondary" (click)="toggleFilter()"
+        >Go
+      </ion-button>
+    </div>
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="datetime-from" presentation="date"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="datetime-til" presentation="date"></ion-datetime>
+      </ng-template>
+    </ion-modal>
   </div>
+  } @if (!isFilterVisible) {
   <ion-searchbar
     (ionInput)="search($event)"
     placeholder="search offers"
   ></ion-searchbar>
+  }
 </ion-header>
 <ion-content [fullscreen]="true">
   <ion-list>

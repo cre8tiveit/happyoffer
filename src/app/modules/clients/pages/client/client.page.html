@@ -1,32 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <div class="w-3"></div>
-      <ion-button>
-        <ng-icon
-          name="heroHomeSolid"
-          class="text-2xl text-black"
-          (click)="goHome()"
-        ></ng-icon>
-      </ion-button>
+      <ion-back-button text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>Happyoffer</ion-title>
+    <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
-
-  <div class="bg-white py-3 px-3 border-b-black border-b-2">
-    <div class="flex items-center">
-      <ion-buttons slot="start">
-        <ion-back-button
-          text=""
-          icon="arrow-back-circle-outline"
-          class="text-black ml-3"
-        ></ion-back-button>
-      </ion-buttons>
-      <div class="ml-5 font-bold">{{ title }}</div>
-    </div>
-  </div>
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content>
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="mx-5">
     <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
       <ion-input

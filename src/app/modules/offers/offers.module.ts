@@ -10,6 +10,7 @@ import { heroHomeSolid } from '@ng-icons/heroicons/solid';
 import { heroFunnel } from '@ng-icons/heroicons/outline';
 import { NgIconsModule } from '@ng-icons/core';
 import { NotesPage } from './pages/notes/notes.page';
+import { ClientsPage } from './pages/clients/clients.page';
 
 const routes: Routes = [
   { path: '', component: OffersPage },
@@ -29,6 +30,6 @@ const routes: Routes = [
       heroFunnel,
     }),
   ],
-  declarations: [OffersPage, OfferPage, NotesPage],
+  declarations: [OffersPage, OfferPage, NotesPage, ClientsPage],
 })
 export class OffersPageModule {}

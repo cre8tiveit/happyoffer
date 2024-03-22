@@ -1,0 +1,37 @@
+ion-fab {
+  margin-bottom: calc(5px + var(--ion-safe-area-bottom)) !important;
+}
+
+ion-tab-bar {
+  --background: var(--dc-color-tabbar-bg)
+}
+
+@keyframes buttonScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  ion-tab-bar {
+    padding-left: 250px;
+    padding-right: 250px;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  ion-tab-bar {
+    display: none
+  }
+}
+
+ion-tab-button:active,
+ion-tab-button:focus {
+  background-color: #e0e0e0;
+}
