@@ -11,7 +11,9 @@
     <div class="grid grid-cols-2 gap-4 mt-32">
       <ion-button expand="full" color="primary">Call mobile</ion-button>
       <ion-button expand="full" color="primary">Call</ion-button>
-      <ion-button expand="full" color="primary">Whatsapp</ion-button>
+      <ion-button expand="full" color="primary" (click)="openWhatsApp()"
+        >Whatsapp</ion-button
+      >
       <ion-button expand="full" color="primary">Website</ion-button>
     </div>
     <ion-button expand="full" color="secondary" class="mt-5" (click)="goNotes()"

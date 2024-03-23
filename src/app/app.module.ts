@@ -13,6 +13,7 @@ import {
   heroUser,
   heroHome,
   heroDocumentText,
+  heroCog6Tooth,
 } from '@ng-icons/heroicons/outline';
 import { TabsComponent } from './modules/tabs/tabs.component';
 import { heroHomeSolid } from '@ng-icons/heroicons/solid';
@@ -32,6 +33,7 @@ import { heroHomeSolid } from '@ng-icons/heroicons/solid';
       heroHome,
       heroHomeSolid,
       heroDocumentText,
+      heroCog6Tooth,
     }),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

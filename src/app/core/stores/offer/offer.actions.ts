@@ -1,5 +1,5 @@
-export class GetActivities {
-  public static readonly type = '[Activities] Get activities'
+export class GetClients {
+  public static readonly type = '[Client] Get clients';
 
   constructor() {}
 }

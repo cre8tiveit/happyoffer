@@ -1,29 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { Client, OfferState } from 'src/app/core/stores/offer/offer.state';
+import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 
 @Component({
   selector: 'app-clients',
   templateUrl: 'clients.page.html',
   styleUrls: ['clients.page.scss'],
 })
-export class ClientsPage {
+export class ClientsPage implements OnInit {
+  @Select(OfferState.clients) public readonly clients$: Observable<
+    StateDataObject<Client[]>
+  >;
+
   constructor(private readonly router: Router) {}
+  ngOnInit(): void {
+    this.clients$.subscribe((clients) => {
+      this.clients = clients.data as Client[];
+      this.filterdClients = this.clients;
+    });
+  }
 
-  public clients = [
-    {
-      id: 1,
-      name: 'Mc Donalds',
-    },
-    {
-      id: 2,
-      name: 'KFC',
-    },
-    {
-      id: 3,
-      name: 'Wendy',
-    },
-  ];
-
+  public clients: Client[] = [];
   public filterdClients: any[] = this.clients;
 
   public search(event: any): void {
