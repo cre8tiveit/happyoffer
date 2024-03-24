@@ -17,6 +17,8 @@ import {
 } from '@ng-icons/heroicons/outline';
 import { TabsComponent } from './modules/tabs/tabs.component';
 import { heroHomeSolid } from '@ng-icons/heroicons/solid';
+import { ClientState } from './core/stores/offer/client.state';
+import { NotificationState } from './core/stores/offer/notification.state';
 
 @NgModule({
   declarations: [AppComponent, TabsComponent],
@@ -24,9 +26,12 @@ import { heroHomeSolid } from '@ng-icons/heroicons/solid';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    NgxsModule.forRoot([OfferState], {
-      developmentMode: !environment.production,
-    }),
+    NgxsModule.forRoot(
+      [OfferState, ClientState, ClientState, NotificationState],
+      {
+        developmentMode: !environment.production,
+      }
+    ),
     NgIconsModule.withIcons({
       heroUsers,
       heroUser,

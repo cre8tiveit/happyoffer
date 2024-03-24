@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { Client, OfferState } from 'src/app/core/stores/offer/offer.state';
+import { ClientState } from 'src/app/core/stores/offer/client.state';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
+import { Client } from 'src/app/core/types/types';
 
 @Component({
   selector: 'app-clients',
@@ -11,7 +12,7 @@ import { StateDataObject } from 'src/app/core/types/store/state-data-object.type
   styleUrls: ['clients.page.scss'],
 })
 export class ClientsPage implements OnInit {
-  @Select(OfferState.clients) public readonly clients$: Observable<
+  @Select(ClientState.clients) public readonly clients$: Observable<
     StateDataObject<Client[]>
   >;
 

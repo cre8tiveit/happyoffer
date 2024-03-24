@@ -49,4 +49,10 @@ export const mockData = {
       email: 'johndoe@gmail.com',
     },
   ],
+  notifications: [
+    {
+      id: 1,
+      name: 'John Doe',
+    },
+  ],
 };

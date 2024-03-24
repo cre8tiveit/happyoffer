@@ -2,8 +2,8 @@ import axios from 'axios';
 
 import { Injectable } from '@angular/core';
 import { mockData } from './data.';
-import { Client } from '../core/stores/offer/offer.state';
 import { Observable } from 'rxjs';
+import { Client } from '../core/types/types';
 
 @Injectable({
   providedIn: 'root',

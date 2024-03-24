@@ -1,4 +1,4 @@
-import { Client, Contact } from './offer.state';
+import { Client, Contact } from '../../types/types';
 
 export class GetClients {
   public static readonly type = '[Client] Get clients';
@@ -9,6 +9,15 @@ export class AddClient {
   constructor(public client: Client) {}
 }
 
+export class DeleteClient {
+  static readonly type = '[Client] Delete Contact';
+  constructor(public id: number) {}
+}
+
+export class EditClient {
+  static readonly type = '[Client] Edit Contact';
+  constructor(public client: Client) {}
+}
 export class GetContacts {
   public static readonly type = '[Contacts] Get contacts';
 }
@@ -16,4 +25,18 @@ export class GetContacts {
 export class AddContact {
   static readonly type = '[Contact] Add';
   constructor(public contact: Contact) {}
+}
+
+export class DeleteContact {
+  static readonly type = '[Contact] Delete Contact';
+  constructor(public id: number) {}
+}
+
+export class EditContact {
+  static readonly type = '[Offer] Edit Contact';
+  constructor(public contact: Client) {}
+}
+
+export class GetNotifications {
+  public static readonly type = '[Client] Get notifications';
 }
