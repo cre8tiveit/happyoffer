@@ -31,4 +31,22 @@ export const mockData = {
     },
     { id: 4492, name: 'Davis-Flynn', email: 'danielemily@bender-clark.info' },
   ],
+
+  contacts: [
+    {
+      id: 1,
+      name: 'John Doe',
+      email: 'johndoe@gmail.com',
+    },
+    {
+      id: 2,
+      name: 'Kees',
+      email: 'johndoe@gmail.com',
+    },
+    {
+      id: 3,
+      name: 'Damaris',
+      email: 'johndoe@gmail.com',
+    },
+  ],
 };
