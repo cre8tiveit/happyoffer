@@ -42,7 +42,6 @@ export class ContactState implements OnDestroy {
   }: StateContext<ContactStateModel>): Observable<StateDataObject<Contact[]>> {
     return this.contactService.getContacts().pipe(
       filter((contacts) => !!contacts),
-      map((contacts) => contacts.map((contacts) => contacts)),
       inspectStatus(),
       tap((result) => patchState({ contacts: result })),
       takeUntil(this._unsubscribe)

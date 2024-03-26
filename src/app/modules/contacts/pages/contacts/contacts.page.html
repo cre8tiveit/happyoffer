@@ -13,7 +13,7 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <ion-list>
-    @for (contact of contacts; track contact.id) {
+    @for (contact of filteredContacts; track contact.id) {
     <ion-item detail (click)="goContact(contact.id)"
       ><ion-label>{{contact.name}}</ion-label></ion-item
     >

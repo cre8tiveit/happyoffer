@@ -1,31 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { ContactState } from 'src/app/core/stores/offer/contact.state';
+import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
+import { Client, Contact } from 'src/app/core/types/types';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: 'contacts.page.html',
   styleUrls: ['contacts.page.scss'],
 })
-export class ContactsPage {
-  constructor(private readonly router: Router) {}
+export class ContactsPage implements OnInit {
+  public contacts: Contact[] = [];
+  public filteredContacts: Contact[] = [];
 
-  public contacts = [
-    {
-      id: 1,
-      name: 'Jansen',
-    },
-    {
-      id: 2,
-      name: 'Jongbloed',
-    },
-  ];
+  @Select(ContactState.contacts) public readonly contacts$: Observable<
+    StateDataObject<Contact[]>
+  >;
+
+  constructor(private readonly router: Router) {}
+  ngOnInit(): void {
+    this.contacts$.subscribe((contacts) => {
+      console.log(contacts);
+      this.contacts = contacts.data as Client[];
+      this.filteredContacts = this.contacts;
+    });
+  }
 
   public ionViewWillEnter() {
     console.log('enter');
-  }
-
-  public goHome(): void {
-    this.router.navigate(['/home']);
   }
 
   public goContact(id: number): void {

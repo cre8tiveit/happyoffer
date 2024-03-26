@@ -1,7 +1,10 @@
 export interface Offer {
   id: number;
+  number: string;
   name: string;
-  email: string;
+  nameContactPerson: string;
+  created: Date;
+  client: string;
 }
 
 export interface Client {
@@ -17,6 +20,11 @@ export interface Contact {
 }
 
 export interface Notification {
+  id: number;
+  name: string;
+}
+
+export interface Logging {
   id: number;
   name: string;
 }

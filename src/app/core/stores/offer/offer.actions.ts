@@ -40,3 +40,11 @@ export class EditContact {
 export class GetNotifications {
   public static readonly type = '[Client] Get notifications';
 }
+
+export class GetLogging {
+  public static readonly type = '[Client] Get logging';
+}
+
+export class GetOffers {
+  public static readonly type = '[Client] Get offers';
+}

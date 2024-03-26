@@ -17,6 +17,7 @@ export class ClientsPage implements OnInit {
   >;
 
   constructor(private readonly router: Router) {}
+
   ngOnInit(): void {
     this.clients$.subscribe((clients) => {
       this.clients = clients.data as Client[];

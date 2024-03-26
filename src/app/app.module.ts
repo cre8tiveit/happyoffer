@@ -19,6 +19,8 @@ import { TabsComponent } from './modules/tabs/tabs.component';
 import { heroHomeSolid } from '@ng-icons/heroicons/solid';
 import { ClientState } from './core/stores/offer/client.state';
 import { NotificationState } from './core/stores/offer/notification.state';
+import { LoggingState } from './core/stores/offer/logging.state';
+import { ContactState } from './core/stores/offer/contact.state';
 
 @NgModule({
   declarations: [AppComponent, TabsComponent],
@@ -27,7 +29,7 @@ import { NotificationState } from './core/stores/offer/notification.state';
     IonicModule.forRoot(),
     AppRoutingModule,
     NgxsModule.forRoot(
-      [OfferState, ClientState, ClientState, NotificationState],
+      [OfferState, ClientState, ContactState, NotificationState, LoggingState],
       {
         developmentMode: !environment.production,
       }

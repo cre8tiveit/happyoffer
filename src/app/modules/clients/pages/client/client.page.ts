@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Client } from 'src/app/core/types/types';
 
 @Component({
   selector: 'app-client',
@@ -8,13 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['client.page.scss'],
 })
 export class ClientPage implements OnInit {
+  @Input()
+  public client: Client | undefined;
+
   myForm: FormGroup;
   title = '';
   editMode = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router) {}
+
+  ngOnInit(): void {
+    console.log(this.client);
     this.myForm = this.fb.group({
-      name: [''],
+      name: [this.client?.name],
       address: [''],
       street: [''],
       zipcode: [''],
@@ -26,8 +33,6 @@ export class ClientPage implements OnInit {
       url: [''],
       number: [''],
     });
-  }
-  ngOnInit(): void {
     this.editMode = this.router.url.includes('edit');
     this.title = this.editMode ? 'Company' : 'Add client';
   }

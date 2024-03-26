@@ -55,4 +55,20 @@ export const mockData = {
       name: 'John Doe',
     },
   ],
+  logging: [
+    {
+      id: 1,
+      name: 'John Doe',
+    },
+  ],
+  offers: [
+    {
+      id: 1,
+      number: '1',
+      name: 'Offer 1',
+      nameContactPerson: 'John Doe',
+      created: new Date(),
+      client: 'Williams, Leonard and Kirby',
+    },
+  ],
 };

@@ -1,51 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ClientsPage } from '../clients/clients.page';
+import { Offer } from 'src/app/core/types/types';
+import { OfferState } from 'src/app/core/stores/offer/offer.state';
+import { Observable } from 'rxjs';
+import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-offers',
   templateUrl: 'offers.page.html',
   styleUrls: ['offers.page.scss'],
 })
-export class OffersPage {
+export class OffersPage implements OnInit {
+  @Select(OfferState.offers) public readonly offers$: Observable<
+    StateDataObject<Offer[]>
+  >;
   public isFilterVisible = false;
-  public offers: any[] = [
-    {
-      id: 1,
-      number: '1',
-      client: 'henk',
-      name: 'Offername',
-      nameContactPerson: 'henk',
-      created: new Date(),
-    },
-    {
-      id: 2,
-      number: '2',
-      client: 'henk',
-      name: 'Offername',
-      nameContactPerson: 'henk',
-      created: new Date(),
-    },
-    {
-      id: 3,
-      number: '3',
-      client: 'henk',
-      name: 'Offername',
-      nameContactPerson: 'henk',
-      created: new Date(),
-    },
-  ];
+  public offers: Offer[] = [];
+  public filteredOffers: Offer[] = [];
+
   constructor(
     private readonly router: Router,
     private modalCtrl: ModalController
   ) {}
 
+  ngOnInit(): void {
+    this.offers$.subscribe((offers) => {
+      this.offers = offers.data as Offer[];
+      this.filteredOffers = this.offers;
+    });
+  }
+
   public ionViewWillEnter() {
     console.log('enter');
   }
 
-  public showDetails(id: string) {
+  public showDetails() {
+    const id = 1;
     this.router.navigate([`/offers/${id}`]);
   }
 

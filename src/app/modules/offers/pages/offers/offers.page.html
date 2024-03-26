@@ -64,11 +64,8 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <ion-list>
-    @for ( offer of offers; track offer.id) {
-    <div
-      class="mb-5 px-5 py-2 even:bg-gray-200"
-      (click)="showDetails(offer.id)"
-    >
+    @for ( offer of filteredOffers; track offer.id) {
+    <div class="mb-5 px-5 py-2 even:bg-gray-200" (click)="showDetails()">
       <div>{{ offer.number }} | {{ offer.client }}</div>
       <div class="font-bold">{{ offer.name }}</div>
       <div>{{ offer.nameContactPerson }}</div>

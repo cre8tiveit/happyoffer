@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Select } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { ClientState } from 'src/app/core/stores/offer/client.state';
-import { OfferState } from 'src/app/core/stores/offer/offer.state';
+
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 import { Client } from 'src/app/core/types/types';
+import { ClientPage } from '../client/client.page';
 
 @Component({
   selector: 'app-clients',
@@ -13,6 +15,8 @@ import { Client } from 'src/app/core/types/types';
   styleUrls: ['clients.page.scss'],
 })
 export class ClientsPage implements OnInit {
+  public presentingElement: any;
+
   @Select(ClientState.clients) public readonly clients$: Observable<
     StateDataObject<Client[]>
   >;
@@ -22,9 +26,13 @@ export class ClientsPage implements OnInit {
 
   private readonly _unsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly modalCtrl: ModalController
+  ) {}
 
   ngOnInit(): void {
+    this.presentingElement = document.querySelector('.ion-page');
     this.clients$.subscribe((clients) => {
       this.clients = clients.data as Client[];
       this.filterdClients = this.clients;
@@ -48,7 +56,17 @@ export class ClientsPage implements OnInit {
     this.router.navigate(['clients/add']);
   }
 
-  public goHome(): void {
-    this.router.navigate(['/home']);
+  async openModal(client: Client) {
+    const modal = await this.modalCtrl.create({
+      component: ClientPage,
+      componentProps: { client },
+      presentingElement: this.presentingElement,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+    }
   }
 }
