@@ -38,6 +38,13 @@ const routes: Routes = [
             (m) => m.OffersPageModule
           ),
       },
+      {
+        path: 'notifications',
+        loadChildren: () =>
+          import('./modules/notifications/notifications.module').then(
+            (m) => m.NotificationsPageModule
+          ),
+      },
     ],
   },
 ];

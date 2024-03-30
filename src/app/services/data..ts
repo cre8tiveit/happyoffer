@@ -52,7 +52,11 @@ export const mockData = {
   notifications: [
     {
       id: 1,
-      name: 'John Doe',
+      name: 'Notification 1',
+    },
+    {
+      id: 2,
+      name: 'Notification 2',
     },
   ],
   logging: [

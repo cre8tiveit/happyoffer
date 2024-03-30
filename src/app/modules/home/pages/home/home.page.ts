@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  public isAndroid = false;
+  public isIos = false;
+  public isWeb = false;
+
   public items = [
     {
       title: 'Clients',
@@ -53,6 +58,13 @@ export class HomePage implements OnInit {
   constructor(private readonly router: Router) {}
 
   ngOnInit(): void {
+    this.isAndroid = Capacitor.getPlatform() === 'android';
+    this.isIos = Capacitor.getPlatform() === 'ios';
+    this.isWeb = Capacitor.getPlatform() === 'web';
+    // this.isAndroid = true;
+    // this.isWeb = false;
+    // this.isIos = false;
+
     this.items = this.items.map((item) => {
       const classes = `${item.background}`;
       const updatedItem = {

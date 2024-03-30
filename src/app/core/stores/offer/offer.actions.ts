@@ -41,6 +41,11 @@ export class GetNotifications {
   public static readonly type = '[Client] Get notifications';
 }
 
+export class DeleteNotification {
+  static readonly type = '[Client] Delete Notification';
+  constructor(public id: number) {}
+}
+
 export class GetLogging {
   public static readonly type = '[Client] Get logging';
 }

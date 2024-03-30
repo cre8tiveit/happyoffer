@@ -11,7 +11,7 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     @for (client of filterdClients; track client.id) {
-    <ion-item (click)="openModal(client)">
+    <ion-item (click)="showClientDetails(client)" detail>
       <ion-label>{{client.name}}</ion-label>
     </ion-item>
     }

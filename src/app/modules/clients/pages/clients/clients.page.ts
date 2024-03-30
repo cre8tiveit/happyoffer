@@ -8,6 +8,7 @@ import { ClientState } from 'src/app/core/stores/offer/client.state';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 import { Client } from 'src/app/core/types/types';
 import { ClientPage } from '../client/client.page';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-clients',
@@ -28,6 +29,7 @@ export class ClientsPage implements OnInit {
 
   constructor(
     private readonly router: Router,
+    private readonly dataService: DataService,
     private readonly modalCtrl: ModalController
   ) {}
 
@@ -46,8 +48,8 @@ export class ClientsPage implements OnInit {
     );
   }
 
-  public showCompanyDetails(company: any): void {
-    console.log(company);
+  public showClientDetails(client: Client): void {
+    this.dataService.setData(client);
     this.router.navigate(['clients/edit']);
   }
 

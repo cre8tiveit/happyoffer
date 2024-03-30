@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/core/types/types';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-client',
@@ -16,9 +17,14 @@ export class ClientPage implements OnInit {
   title = '';
   editMode = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private dataService: DataService
+  ) {}
 
   ngOnInit(): void {
+    this.client = this.dataService.getData();
     console.log(this.client);
     this.myForm = this.fb.group({
       name: [this.client?.name],
@@ -27,7 +33,7 @@ export class ClientPage implements OnInit {
       zipcode: [''],
       city: [''],
       country: [''],
-      email: [''],
+      email: [this.client?.email],
       cocn: [''],
       phonenumber: [''],
       url: [''],

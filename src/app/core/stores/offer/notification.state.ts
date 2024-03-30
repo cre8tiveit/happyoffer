@@ -4,7 +4,7 @@ import { StateDataObject } from '../../types/store/state-data-object.type';
 import { StateDataObjectHelper } from '../../helpers/state-data-object.helper';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { Observable, Subject, filter, takeUntil, tap } from 'rxjs';
-import { GetNotifications } from './offer.actions';
+import { DeleteNotification, GetNotifications } from './offer.actions';
 import { inspectStatus } from '../../helpers/rxjs.helper';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Notification } from '../../types/types';
@@ -44,6 +44,24 @@ export class NotificationState implements OnDestroy {
       tap((result) => patchState({ notifications: result })),
       takeUntil(this._unsubscribe)
     );
+  }
+
+  @Action(DeleteNotification)
+  public deleteClient(
+    { getState, patchState }: StateContext<NotificationStateModel>,
+    { id }: DeleteNotification
+  ) {
+    const currentNotifications = getState().notifications?.data || [];
+    const updatedNotifications = currentNotifications.filter(
+      (notification) => notification.id !== id
+    );
+
+    patchState({
+      notifications: {
+        ...getState().notifications,
+        data: updatedNotifications,
+      },
+    });
   }
 
   ngOnDestroy(): void {
