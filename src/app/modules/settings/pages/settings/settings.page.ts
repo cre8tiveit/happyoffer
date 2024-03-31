@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 export class SettingsPage {
   constructor(private readonly router: Router) {}
 
+  public everyNotification: boolean = true;
+
   public goHome(): void {
     this.router.navigate(['/home']);
   }

@@ -1,29 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <div class="w-3"></div>
-      <ion-button>
-        <ng-icon
-          name="heroHomeSolid"
-          class="text-2xl text-black"
-          (click)="goHome()"
-        ></ng-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Happyoffer</ion-title>
+    <ion-buttons slot="start"> </ion-buttons>
+    <ion-title>Settings</ion-title>
   </ion-toolbar>
-
-  <div class="bg-white py-3 px-3 border-b-black border-b-2">
-    <div class="flex items-center">
-      <ion-buttons slot="start">
-        <ion-back-button
-          text=""
-          icon="arrow-back-circle-outline"
-          class="text-black ml-3"
-        ></ion-back-button>
-      </ion-buttons>
-      <div class="ml-5 font-bold">Settings</div>
-    </div>
-  </div>
 </ion-header>
-<ion-content [fullscreen]="true"> settings </ion-content>
+<ion-content>
+  <ion-list class="mt-5">
+    <ion-item>
+      <ion-label>Notifications for every offer</ion-label>
+      <ion-toggle [(ngModel)]="everyNotification" slot="end"></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+  @if (!everyNotification) {
+  <ion-button color="primary" expand="block" class="mx-5 mt-5">
+    Set notifications per offer
+  </ion-button>
+  }
+</ion-content>

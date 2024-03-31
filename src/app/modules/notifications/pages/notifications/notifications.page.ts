@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { NotificationState } from 'src/app/core/stores/offer/notification.state';
 import { DeleteNotification } from 'src/app/core/stores/offer/offer.actions';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
@@ -21,7 +21,6 @@ export class NotificationsPage implements OnInit {
 
   ngOnInit(): void {
     this.notifications$.subscribe((notifications) => {
-      console.log(notifications);
       this.notifications = notifications.data as Notification[];
     });
   }
