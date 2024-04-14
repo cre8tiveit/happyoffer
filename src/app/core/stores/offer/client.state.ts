@@ -59,6 +59,7 @@ export class ClientState implements OnDestroy {
   ) {
     const currentClients = getState().clients?.data || [];
     const updatedClients: Client[] = [...currentClients, client];
+    this.clientService.addClient(client);
 
     patchState({
       clients: {
@@ -85,11 +86,12 @@ export class ClientState implements OnDestroy {
   }
 
   @Action(EditClient)
-  public editClient(
+  public async editClient(
     { getState, patchState }: StateContext<ClientStateModel>,
     { client }: EditClient
   ) {
     const currentClients = getState().clients?.data || [];
+    this.clientService.updateClient(client);
 
     const updatedClients = currentClients.map((existingClient) =>
       existingClient.id === client.id ? client : existingClient

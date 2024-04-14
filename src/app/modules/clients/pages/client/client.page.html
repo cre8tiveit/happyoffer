@@ -8,7 +8,7 @@
 </ion-header>
 <ion-content>
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="mx-5">
-    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+    <div class="mt-5 border border-1 border-black px-2 rounded-md">
       <ion-input
         label="Client name"
         labelPlacement="floating"
@@ -18,7 +18,18 @@
       />
     </div>
 
-    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+    <div *ngIf="myForm.get('name')?.errors && myForm.get('name')?.touched">
+      <ng-container *ngFor="let validation of validations.name">
+        <div
+          *ngIf="myForm.get('name')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="mt-5 border border-1 border-black px-2 rounded-md">
       <ion-input
         label="Zip code"
         labelPlacement="floating"
@@ -28,7 +39,20 @@
       />
     </div>
 
-    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+    <div
+      *ngIf="myForm.get('zipcode')?.errors && myForm.get('zipcode')?.touched"
+    >
+      <ng-container *ngFor="let validation of validations.zipcode">
+        <div
+          *ngIf="myForm.get('zipcode')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="mt-5 border border-1 border-black px-2 rounded-md">
       <ion-input
         label="Adress"
         labelPlacement="floating"
@@ -37,8 +61,20 @@
         formControlName="address"
       />
     </div>
+    <div
+      *ngIf="myForm.get('address')?.errors && myForm.get('address')?.touched"
+    >
+      <ng-container *ngFor="let validation of validations.address">
+        <div
+          *ngIf="myForm.get('name')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
 
-    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+    <div class="mt-5 border border-1 border-black px-2 rounded-md">
       <ion-input
         label="Number"
         labelPlacement="floating"
@@ -47,8 +83,18 @@
         formControlName="number"
       />
     </div>
+    <div *ngIf="myForm.get('number')?.errors && myForm.get('number')?.touched">
+      <ng-container *ngFor="let validation of validations.number">
+        <div
+          *ngIf="myForm.get('number')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
 
-    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+    <div class="mt-5 border border-1 border-black px-2 rounded-md">
       <ion-input
         label="Country"
         labelPlacement="floating"
@@ -57,8 +103,20 @@
         formControlName="country"
       />
     </div>
+    <div
+      *ngIf="myForm.get('country')?.errors && myForm.get('country')?.touched"
+    >
+      <ng-container *ngFor="let validation of validations.country">
+        <div
+          *ngIf="myForm.get('country')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
 
-    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+    <div class="mt-5 border border-1 border-black px-2 rounded-md">
       <ion-input
         label="City"
         labelPlacement="floating"
@@ -67,8 +125,18 @@
         formControlName="city"
       />
     </div>
+    <div *ngIf="myForm.get('city')?.errors && myForm.get('city')?.touched">
+      <ng-container *ngFor="let validation of validations.city">
+        <div
+          *ngIf="myForm.get('city')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
 
-    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+    <div class="mt-5 border border-1 border-black px-2 rounded-md">
       <ion-input
         label="Email"
         labelPlacement="floating"
@@ -77,8 +145,18 @@
         formControlName="email"
       />
     </div>
+    <div *ngIf="myForm.get('email')?.errors && myForm.get('email')?.touched">
+      <ng-container *ngFor="let validation of validations.email">
+        <div
+          *ngIf="myForm.get('email')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
 
-    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+    <div class="mt-5 border border-1 border-black px-2 rounded-md">
       <ion-input
         label="Chamber of commerce number"
         labelPlacement="floating"
@@ -87,8 +165,18 @@
         formControlName="cocn"
       />
     </div>
+    <div *ngIf="myForm.get('cocn')?.errors && myForm.get('cocn')?.touched">
+      <ng-container *ngFor="let validation of validations.cocn">
+        <div
+          *ngIf="myForm.get('cocn')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
 
-    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+    <div class="mt-5 border border-1 border-black px-2 rounded-md">
       <ion-input
         label="Phone number"
         labelPlacement="floating"
@@ -97,8 +185,20 @@
         formControlName="phonenumber"
       />
     </div>
+    <div
+      *ngIf="myForm.get('phonenumber')?.errors && myForm.get('phonenumber')?.touched"
+    >
+      <ng-container *ngFor="let validation of validations.phonenumber">
+        <div
+          *ngIf="myForm.get('phonenumber')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
 
-    <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
+    <div class="mt-5 border border-1 border-black px-2 rounded-md">
       <ion-input
         label="Website url"
         labelPlacement="floating"
@@ -107,9 +207,18 @@
         formControlName="url"
       />
     </div>
-
+    <div *ngIf="myForm.get('url')?.errors && myForm.get('url')?.touched">
+      <ng-container *ngFor="let validation of validations.url">
+        <div
+          *ngIf="myForm.get('url')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
     <div class="my-10">
-      <ion-button type="submit" expand="full" color="secondary"
+      <ion-button type="submit" expand="full" shape="round" color="primary"
         >Save</ion-button
       >
     </div>

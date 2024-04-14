@@ -29,6 +29,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/assets/fonts/Montserrat-VariableFont_wght.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+ion-label {
+    font-family: "Montserrat";
+    font-weight: 400;
+}
+
+
+ion-button {
+    font-family: "Montserrat";
+    font-weight: 600;
+}
+
 ion-toolbar {
     --background: #ffd31d;
     --border-color: #ffd31d;
@@ -37,4 +55,10 @@ ion-toolbar {
 
 ion-back-button {
     --color: black;
+}
+
+ion-title {
+    font-family: 'Montserrat';
+    font-weight: 600;
+
 }

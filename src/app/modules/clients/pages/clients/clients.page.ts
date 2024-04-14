@@ -54,7 +54,6 @@ export class ClientsPage implements OnInit {
   }
 
   public addClient(): void {
-    console.log('Add client');
     this.router.navigate(['clients/add']);
   }
 

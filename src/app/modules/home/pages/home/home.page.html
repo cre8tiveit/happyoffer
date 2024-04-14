@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="ios">
   @if (isIos) {
   <div
     class="bg-primary text-black flex justify-center items-center pt-16 py-4"
@@ -42,7 +42,7 @@
       [ngClass]="item.classes"
     >
       <ng-icon [name]="item.icon" class="text-6xl"></ng-icon>
-      <div class="font-bold">{{ item.title}}</div>
+      <div class="font-bold font-default">{{ item.title}}</div>
     </div>
     }
   </div>

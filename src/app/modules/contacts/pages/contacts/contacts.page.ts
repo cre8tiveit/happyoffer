@@ -22,7 +22,7 @@ export class ContactsPage implements OnInit {
   constructor(private readonly router: Router) {}
   ngOnInit(): void {
     this.contacts$.subscribe((contacts) => {
-      this.contacts = contacts.data as Client[];
+      // this.contacts = contacts.data as Client[];
       this.filteredContacts = this.contacts;
     });
   }

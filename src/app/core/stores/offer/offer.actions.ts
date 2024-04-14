@@ -20,6 +20,7 @@ export class EditClient {
 }
 export class GetContacts {
   public static readonly type = '[Contacts] Get contacts';
+  constructor(public id: number) {}
 }
 
 export class AddContact {

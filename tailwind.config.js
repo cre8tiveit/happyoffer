@@ -7,6 +7,9 @@ module.exports = {
         secondary: "#90d14f",
         tertiary: "#e6e6e6",
       },
+      fontFamily: {
+        default: ["Montserrat", "sans-serif"],
+      },
     },
   },
   plugins: [],

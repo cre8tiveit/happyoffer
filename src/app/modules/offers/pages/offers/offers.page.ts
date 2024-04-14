@@ -7,6 +7,7 @@ import { OfferState } from 'src/app/core/stores/offer/offer.state';
 import { Observable } from 'rxjs';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 import { Select } from '@ngxs/store';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-offers',
@@ -23,7 +24,8 @@ export class OffersPage implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private readonly dataService: DataService
   ) {}
 
   ngOnInit(): void {
@@ -37,9 +39,9 @@ export class OffersPage implements OnInit {
     console.log('enter');
   }
 
-  public showDetails() {
-    const id = 1;
-    this.router.navigate([`/offers/${id}`]);
+  public showDetails(offer: Offer): void {
+    this.dataService.setData(offer);
+    this.router.navigate([`/offers/detail`]);
   }
 
   public goHome(): void {

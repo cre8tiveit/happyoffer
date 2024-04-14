@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ClientPage } from './pages/client/client.page';
 import { heroHomeSolid, heroPlusCircleSolid } from '@ng-icons/heroicons/solid';
 import { NgIconsModule } from '@ng-icons/core';
+import { ValidationMessagesComponent } from './component/validation-messages/validation-messages.component';
 
 const routes: Routes = [
   { path: '', component: ClientsPage },
@@ -28,6 +29,6 @@ const routes: Routes = [
       heroPlusCircleSolid,
     }),
   ],
-  declarations: [ClientsPage, ClientPage],
+  declarations: [ClientsPage, ClientPage, ValidationMessagesComponent],
 })
 export class ClientsPageModule {}

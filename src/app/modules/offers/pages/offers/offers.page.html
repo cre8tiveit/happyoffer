@@ -65,11 +65,11 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     @for ( offer of filteredOffers; track offer.id) {
-    <div class="mb-5 px-5 py-2 even:bg-gray-200" (click)="showDetails()">
-      <div>{{ offer.number }} | {{ offer.client }}</div>
+    <div class="mb-5 px-5 py-2 even:bg-gray-200" (click)="showDetails(offer)">
+      <div>{{ offer.offerNumber }} | {{ offer.client }}</div>
       <div class="font-bold">{{ offer.name }}</div>
       <div>{{ offer.nameContactPerson }}</div>
-      <div>Offer made at {{ offer.created | date:"dd-MM-yyyy"}}</div>
+      <div>Offer made at {{ offer.offerDate}}</div>
     </div>
     }
   </ion-list>

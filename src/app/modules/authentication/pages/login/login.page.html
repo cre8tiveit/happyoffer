@@ -12,10 +12,13 @@
         </div>
         @if (loginForm.controls.email.invalid && (loginForm.controls.email.dirty
         || loginForm.controls.email.touched)) {
-        <p *ngIf="loginForm.controls.email.errors.required">
+        <p
+          *ngIf="loginForm.controls.email.errors.required"
+          class="text-red-500"
+        >
           Email is required.
         </p>
-        <p *ngIf="loginForm.controls.email.errors.email">
+        <p *ngIf="loginForm.controls.email.errors.email" class="text-red-500">
           Enter a valid email.
         </p>
         }
@@ -28,7 +31,10 @@
         @if(loginForm.controls.password.invalid &&
         (loginForm.controls.password.dirty ||
         loginForm.controls.password.touched)) {
-        <p *ngIf="loginForm.controls.password.errors.required">
+        <p
+          *ngIf="loginForm.controls.password.errors.required"
+          class="text-red-500"
+        >
           Password is required.
         </p>
         }

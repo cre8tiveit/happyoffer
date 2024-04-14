@@ -1,0 +1,7 @@
+<div *ngIf="control?.errors && control?.touched">
+  <ng-container *ngFor="let validation of fieldValidations">
+    <div *ngIf="control.hasError(validation.type)" class="text-red-600">
+      {{ validation.message }}
+    </div>
+  </ng-container>
+</div>

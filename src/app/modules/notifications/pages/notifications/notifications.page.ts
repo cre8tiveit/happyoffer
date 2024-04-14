@@ -22,6 +22,7 @@ export class NotificationsPage implements OnInit {
   ngOnInit(): void {
     this.notifications$.subscribe((notifications) => {
       this.notifications = notifications.data as Notification[];
+      console.log('notifications', this.notifications);
     });
   }
 

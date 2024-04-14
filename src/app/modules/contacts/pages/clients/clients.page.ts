@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ClientState } from 'src/app/core/stores/offer/client.state';
+import { GetContacts } from 'src/app/core/stores/offer/offer.actions';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 import { Client } from 'src/app/core/types/types';
 
@@ -16,12 +17,13 @@ export class ClientsPage implements OnInit {
     StateDataObject<Client[]>
   >;
 
-  constructor(private readonly router: Router) {}
+  constructor(private readonly router: Router, private readonly store: Store) {}
 
   ngOnInit(): void {
     this.clients$.subscribe((clients) => {
       this.clients = clients.data as Client[];
       this.filterdClients = this.clients;
+      console.log(this.clients);
     });
   }
 
@@ -43,6 +45,7 @@ export class ClientsPage implements OnInit {
   }
 
   public goContacts(id: number): void {
+    this.store.dispatch(new GetContacts(id));
     this.router.navigate([`/contacts/client/${id}`]);
   }
 }

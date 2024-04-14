@@ -15,7 +15,9 @@
   <ion-list>
     @for (contact of filteredContacts; track contact.id) {
     <ion-item detail (click)="goContact(contact.id)"
-      ><ion-label>{{contact.name}}</ion-label></ion-item
+      ><ion-label
+        >{{contact.firstname}} {{contact.lastname}}</ion-label
+      ></ion-item
     >
     }
   </ion-list>

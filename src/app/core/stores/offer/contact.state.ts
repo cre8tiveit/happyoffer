@@ -14,6 +14,7 @@ import {
 import { inspectStatus } from '../../helpers/rxjs.helper';
 import { ContactService } from 'src/app/services/contact.service';
 import { Contact } from '../../types/types';
+import { ClientService } from 'src/app/services/client.service';
 
 export interface ContactStateModel {
   contacts: StateDataObject<Contact[]>;
@@ -29,7 +30,7 @@ export interface ContactStateModel {
 export class ContactState implements OnDestroy {
   private readonly _unsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(private readonly contactService: ContactService) {}
+  constructor(private readonly clientService: ClientService) {}
 
   @Selector()
   public static contacts(state: ContactStateModel): StateDataObject<Contact[]> {
@@ -37,10 +38,11 @@ export class ContactState implements OnDestroy {
   }
 
   @Action(GetContacts)
-  public GetContacts({
-    patchState,
-  }: StateContext<ContactStateModel>): Observable<StateDataObject<Contact[]>> {
-    return this.contactService.getContacts().pipe(
+  public GetContacts(
+    { patchState }: StateContext<ContactStateModel>,
+    id: string
+  ): Observable<StateDataObject<Contact[]>> {
+    return this.clientService.getContacts(id).pipe(
       filter((contacts) => !!contacts),
       inspectStatus(),
       tap((result) => patchState({ contacts: result })),
@@ -96,7 +98,7 @@ export class ContactState implements OnDestroy {
     patchState({
       contacts: {
         ...getState().contacts,
-        data: updatedContacts,
+        //data: updatedContacts,
       },
     });
   }

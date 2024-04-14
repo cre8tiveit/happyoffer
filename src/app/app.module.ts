@@ -15,6 +15,7 @@ import {
   heroDocumentText,
   heroCog6Tooth,
   heroTrash,
+  heroPlusCircle,
 } from '@ng-icons/heroicons/outline';
 import { TabsComponent } from './modules/tabs/tabs.component';
 import { heroHomeSolid } from '@ng-icons/heroicons/solid';
@@ -43,6 +44,7 @@ import { ContactState } from './core/stores/offer/contact.state';
       heroDocumentText,
       heroCog6Tooth,
       heroTrash,
+      heroPlusCircle,
     }),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
