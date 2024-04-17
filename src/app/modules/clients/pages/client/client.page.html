@@ -83,6 +83,7 @@
         formControlName="number"
       />
     </div>
+
     <div *ngIf="myForm.get('number')?.errors && myForm.get('number')?.touched">
       <ng-container *ngFor="let validation of validations.number">
         <div

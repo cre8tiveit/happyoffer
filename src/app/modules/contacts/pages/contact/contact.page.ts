@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-contact',
@@ -8,23 +9,54 @@ import { Router } from '@angular/router';
 })
 export class ContactPage implements OnInit {
   public contactForm: FormGroup;
-  title = '';
-  addMode = false;
+  public title = '';
+  public editMode = false;
 
-  constructor(private router: Router, private fb: FormBuilder) {
+  validations = {
+    firstname: [{ type: 'required', message: 'First name is required.' }],
+    lastname: [{ type: 'required', message: 'Last name is required.' }],
+    email: [
+      { type: 'required', message: 'Email is required.' },
+      { type: 'pattern', message: 'Invalid email.' },
+    ],
+    emailConfirmation: [
+      { type: 'required', message: 'Email is required.' },
+      { type: 'pattern', message: 'Invalid email.' },
+    ],
+    phonenumber: [
+      { type: 'required', message: 'Phone number is required.' },
+      { type: 'pattern', message: 'Invalid phone number.' },
+    ],
+  };
+
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private dataService: DataService
+  ) {
+    this.editMode = !this.router.url.includes('add');
+    const contact = this.dataService.getData();
     this.contactForm = this.fb.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      phonenumber: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      emailConfirmation: ['', [Validators.required]],
-      notes: [''],
+      firstname: [
+        this.editMode ? contact.firstname : '',
+        [Validators.required],
+      ],
+      lastname: [this.editMode ? contact.lastname : '', [Validators.required]],
+      phonenumber: [
+        this.editMode ? contact.phoneNumber : '',
+        [Validators.required, Validators.pattern('\\^+[1-9]d{1,14}$')],
+      ],
+      email: [this.editMode ? contact.email : '', [Validators.required]],
+      emailConfirmation: [
+        this.editMode ? contact.emailConfirmation : '',
+        [Validators.required],
+      ],
+      notes: [this.editMode ? contact.note : ''],
     });
   }
 
   ngOnInit(): void {
-    this.addMode = this.router.url.includes('add');
-    this.title = this.addMode ? 'Add contact' : 'Contact';
+    this.title = this.editMode ? 'Contact' : 'Add contact';
   }
 
   public goHome(): void {
@@ -59,5 +91,8 @@ export class ContactPage implements OnInit {
       },
     },
   ];
-  public onSubmit() {}
+
+  public onSubmit() {
+    console.log(this.contactForm.value);
+  }
 }

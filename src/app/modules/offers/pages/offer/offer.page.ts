@@ -33,4 +33,8 @@ export class OfferPage implements OnInit {
   public showOffer(): void {
     Browser.open({ url: this.offer.url });
   }
+
+  public openWebsite(): void {
+    Browser.open({ url: this.offer.client.websiteUrl });
+  }
 }

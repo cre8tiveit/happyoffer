@@ -6,19 +6,25 @@
     <ion-title>Contacts</ion-title>
   </ion-toolbar>
 
+  @if (contacts.length !== 0) {
   <ion-searchbar
     (ionInput)="search($event)"
     placeholder="search"
   ></ion-searchbar>
+  }
 </ion-header>
 <ion-content [fullscreen]="true">
+  @if (contacts.length !== 0) {
   <ion-list>
     @for (contact of filteredContacts; track contact.id) {
-    <ion-item detail (click)="goContact(contact.id)"
+    <ion-item detail (click)="goContact(contact)"
       ><ion-label
         >{{contact.firstname}} {{contact.lastname}}</ion-label
       ></ion-item
     >
     }
   </ion-list>
+  } @else {
+  <div class="mt-10 flex justify-center">There are no contacts yet</div>
+  }
 </ion-content>

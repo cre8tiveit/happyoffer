@@ -23,7 +23,6 @@ export class ClientsPage implements OnInit {
     this.clients$.subscribe((clients) => {
       this.clients = clients.data as Client[];
       this.filterdClients = this.clients;
-      console.log(this.clients);
     });
   }
 
@@ -35,9 +34,6 @@ export class ClientsPage implements OnInit {
     this.filterdClients = this.clients.filter((client) =>
       client.name.toLowerCase().includes(query)
     );
-  }
-  public ionViewWillEnter() {
-    console.log('enter');
   }
 
   public goHome(): void {

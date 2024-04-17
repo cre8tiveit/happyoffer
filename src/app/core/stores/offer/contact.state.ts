@@ -40,9 +40,10 @@ export class ContactState implements OnDestroy {
   @Action(GetContacts)
   public GetContacts(
     { patchState }: StateContext<ContactStateModel>,
-    id: string
+    payload: { id: number }
   ): Observable<StateDataObject<Contact[]>> {
-    return this.clientService.getContacts(id).pipe(
+    console.log('GetContacts', payload);
+    return this.clientService.getContacts(payload.id).pipe(
       filter((contacts) => !!contacts),
       inspectStatus(),
       tap((result) => patchState({ contacts: result })),

@@ -4,7 +4,8 @@ export interface Offer {
   name: string;
   nameContactPerson: string;
   created: Date;
-  client: string;
+  client: Client;
+  offer: Offer;
 }
 
 export interface Client {
@@ -68,4 +69,6 @@ export interface Offer {
   totalOfferPriceOnce: string;
   totalOfferPriceRepeat: string;
   url: string;
+  client: Client;
+  contact?: Contact;
 }

@@ -95,7 +95,7 @@ export class ClientService {
     return axios.post(url, updatedData, config);
   }
 
-  getContacts(id: string): Observable<Contact[]> {
+  getContacts(id: number): Observable<Contact[]> {
     const user = getUser();
     const token = user?.token || '';
 

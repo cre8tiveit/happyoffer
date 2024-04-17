@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ContactState } from 'src/app/core/stores/offer/contact.state';
+import { GetContacts } from 'src/app/core/stores/offer/offer.actions';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
-import { Client, Contact } from 'src/app/core/types/types';
+import { Contact } from 'src/app/core/types/types';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-contacts',
@@ -19,21 +21,45 @@ export class ContactsPage implements OnInit {
     StateDataObject<Contact[]>
   >;
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly store: Store,
+    private readonly dataService: DataService
+  ) {}
   ngOnInit(): void {
     this.contacts$.subscribe((contacts) => {
-      // this.contacts = contacts.data as Client[];
-      this.filteredContacts = this.contacts;
+      const c: Contact[] =
+        contacts.data?.map((contact) => ({
+          id: contact.id,
+          firstname: contact.firstname,
+          lastname: contact.lastname,
+          gender: contact.gender,
+          email: contact.email,
+          emailConfirmation: contact.emailConfirmation,
+          phoneNumber: contact.phoneNumber,
+          note: contact.note,
+        })) || [];
+
+      this.contacts = c;
+      this.filteredContacts = c;
     });
   }
 
-  public goContact(id: number): void {
-    this.router.navigate([`/contacts/client/contact/${id}`]);
+  public goContact(contact: Contact): void {
+    this.dataService.setData(contact);
+    this.router.navigate([`/contacts/client/contact/${contact.id}`]);
   }
 
   public add(): void {
     this.router.navigate([`/contacts/client/contact/add`]);
   }
 
-  public search($event: any) {}
+  public search($event: any) {
+    const query = $event.target.value.toLowerCase();
+    this.filteredContacts = this.contacts.filter(
+      (contact) =>
+        contact.firstname.toLowerCase().includes(query) ||
+        contact.lastname.toLowerCase().includes(query)
+    );
+  }
 }

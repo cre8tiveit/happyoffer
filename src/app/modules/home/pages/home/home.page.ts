@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -55,7 +56,10 @@ export class HomePage implements OnInit {
     },
   ];
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly navController: NavController
+  ) {}
 
   ngOnInit(): void {
     this.isAndroid = Capacitor.getPlatform() === 'android';
@@ -76,6 +80,6 @@ export class HomePage implements OnInit {
   }
 
   public navigate(url: string): void {
-    this.router.navigate([url]);
+    this.navController.navigateForward(url);
   }
 }

@@ -66,7 +66,7 @@
   <ion-list>
     @for ( offer of filteredOffers; track offer.id) {
     <div class="mb-5 px-5 py-2 even:bg-gray-200" (click)="showDetails(offer)">
-      <div>{{ offer.offerNumber }} | {{ offer.client }}</div>
+      <div>{{ offer.offerNumber }} | {{ offer.contact?.firstname }}</div>
       <div class="font-bold">{{ offer.name }}</div>
       <div>{{ offer.nameContactPerson }}</div>
       <div>Offer made at {{ offer.offerDate}}</div>

@@ -18,6 +18,19 @@
       />
     </div>
 
+    <div
+      *ngIf="contactForm.get('firstname')?.errors && contactForm.get('firstname')?.touched"
+    >
+      <ng-container *ngFor="let validation of validations.firstname">
+        <div
+          *ngIf="contactForm.get('firstname')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
     <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
       <ion-input
         label="last name"
@@ -28,6 +41,19 @@
       />
     </div>
 
+    <div
+      *ngIf="contactForm.get('lastname')?.errors && contactForm.get('lastname')?.touched"
+    >
+      <ng-container *ngFor="let validation of validations.lastname">
+        <div
+          *ngIf="contactForm.get('lastname')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
     <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
       <ion-input
         label="phone number"
@@ -36,6 +62,19 @@
         type="text"
         formControlName="phonenumber"
       />
+    </div>
+
+    <div
+      *ngIf="contactForm.get('phonenumber')?.errors && contactForm.get('phonenumber')?.touched"
+    >
+      <ng-container *ngFor="let validation of validations.phonenumber">
+        <div
+          *ngIf="contactForm.get('phonenumber')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
     </div>
 
     <div
@@ -62,6 +101,19 @@
       />
     </div>
 
+    <div
+      *ngIf="contactForm.get('email')?.errors && contactForm.get('email')?.touched"
+    >
+      <ng-container *ngFor="let validation of validations.email">
+        <div
+          *ngIf="contactForm.get('email')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
     <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
       <ion-input
         label="email confirmation"
@@ -70,6 +122,19 @@
         type="text"
         formControlName="emailConfirmation"
       />
+    </div>
+
+    <div
+      *ngIf="contactForm.get('emailConfirmation')?.errors && contactForm.get('emailConfirmation')?.touched"
+    >
+      <ng-container *ngFor="let validation of validations.emailConfirmation">
+        <div
+          *ngIf="contactForm.get('emailConfirmation')?.hasError(validation.type)"
+          class="text-red-600"
+        >
+          {{ validation.message }}
+        </div>
+      </ng-container>
     </div>
 
     <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
@@ -83,7 +148,7 @@
     </div>
 
     <div class="mt-10">
-      <ion-button type="submit" expand="full" color="secondary"
+      <ion-button type="submit" expand="full" color="primary" shape="round"
         >Save</ion-button
       >
     </div>
