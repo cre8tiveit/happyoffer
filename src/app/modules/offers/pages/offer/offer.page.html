@@ -7,8 +7,32 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <div class="mx-5">
-    <div class="grid grid-cols-2 gap-4 mt-32">
+  <div class="mx-5 pt-5">
+    <div class="flex justify-between items-center mt-2">
+      <div>{{ offer.offerNumber }}</div>
+      <div class="font-bold">{{ offer.offerStatus }}</div>
+    </div>
+
+    <div class="font-bold">{{ offer.name }}</div>
+
+    <div>made at</div>
+    <div>updated</div>
+
+    <div>{{ offer.contact?.firstname }} {{ offer.contact?.lastname }}</div>
+
+    <div>{{ offer.client.name }}</div>
+
+    <div class="mt-2">
+      <ion-label class="font-bold">Offer URL</ion-label>
+    </div>
+
+    <div class="text-nowrap max-w-3/4">{{offer.url.substring(0, 45)}}</div>
+
+    <ion-button color="primary" size="small" class="mt-2" shape="round"
+      >Copy</ion-button
+    >
+
+    <div class="grid grid-cols-2 gap-4 mt-5">
       <ion-button expand="full" color="primary">Call mobile</ion-button>
       <ion-button expand="full" color="primary">Call</ion-button>
       <ion-button expand="full" color="primary" (click)="openWhatsApp()"

@@ -3,9 +3,8 @@ import { StateDataObject } from '../../types/store/state-data-object.type';
 import { StateDataObjectHelper } from '../../helpers/state-data-object.helper';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { Observable, Subject, filter, map, takeUntil, tap } from 'rxjs';
-import { Client, Offer } from '../../types/types';
+import { Offer } from '../../types/types';
 import { inspectStatus } from '../../helpers/rxjs.helper';
-import { ClientStateModel } from './client.state';
 import { OfferService } from 'src/app/services/offer.service';
 import { GetOffers } from './offer.actions';
 

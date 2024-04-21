@@ -25,7 +25,7 @@ export class GetContacts {
 
 export class AddContact {
   static readonly type = '[Contact] Add';
-  constructor(public contact: Contact) {}
+  constructor(public clientId: number, public contact: Contact) {}
 }
 
 export class DeleteContact {
@@ -35,11 +35,15 @@ export class DeleteContact {
 
 export class EditContact {
   static readonly type = '[Offer] Edit Contact';
-  constructor(public contact: Client) {}
+  constructor(public contact: Contact) {}
 }
 
 export class GetNotifications {
   public static readonly type = '[Client] Get notifications';
+}
+
+export class GetNotificationsCount {
+  public static readonly type = '[Client] Get notifications count';
 }
 
 export class DeleteNotification {

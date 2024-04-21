@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { NotificationState } from 'src/app/core/stores/offer/notification.state';
 import { DeleteNotification } from 'src/app/core/stores/offer/offer.actions';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
@@ -15,7 +16,10 @@ export class NotificationsPage implements OnInit {
   @Select(NotificationState.notifications)
   public readonly notifications$: Observable<StateDataObject<Notification[]>>;
 
-  constructor(private readonly store: Store) {}
+  constructor(
+    private readonly store: Store,
+    private readonly navController: NavController
+  ) {}
 
   public notifications: Notification[] = [];
 
@@ -27,6 +31,13 @@ export class NotificationsPage implements OnInit {
   }
 
   public delete(id: number): void {
+    console.log('delete', id);
     this.store.dispatch(new DeleteNotification(id));
+  }
+
+  public showOffer(offerId: number): void {
+    console.log('notification', offerId);
+    offerId = 1;
+    this.navController.navigateForward(`/offers/${offerId}`);
   }
 }

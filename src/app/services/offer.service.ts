@@ -34,10 +34,6 @@ export class OfferService {
 
     return from(axios.get(url, config)).pipe(
       map((response) => {
-        console.log(
-          'response offer',
-          response.data.data[0].relationships.contact
-        );
         const offers = response.data.data.map(
           (offer: any) =>
             ({
@@ -69,7 +65,7 @@ export class OfferService {
               },
             } as any)
         );
-        console.log('offers', offers);
+
         return offers;
       }),
       catchError((error) => throwError(() => error))

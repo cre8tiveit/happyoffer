@@ -10,7 +10,7 @@
   <ion-list>
     @for( notification of notifications; track notification?.id) {
     <ion-item-sliding>
-      <ion-item>
+      <ion-item detail (click)="showOffer(notification.offerId)">
         <ion-label>
           <div class="font-bold">
             {{ notification.createdAt }} | {{notification.createdBy}}

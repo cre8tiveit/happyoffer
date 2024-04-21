@@ -3,10 +3,11 @@ import axios from 'axios';
 import { Injectable } from '@angular/core';
 
 import { Observable, catchError, from, map, throwError } from 'rxjs';
-import { Notification } from '../core/types/types';
+import { Notification, NotificationCount } from '../core/types/types';
 import { getUser } from '../core/helpers/api.helper';
 import { BASE_URL } from '../core/const';
 import { format } from 'date-fns';
+import { DeleteNotification } from '../core/stores/offer/offer.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,6 @@ export class NotificationService {
 
     return from(axios.get(url, config)).pipe(
       map((response) => {
-        console.log('response', response.data.data);
         const notifications = response.data.data.map(
           (notification: any) =>
             ({
@@ -44,10 +44,46 @@ export class NotificationService {
               createdBy: notification.attributes.created_by,
             } as Notification)
         );
-        console.log('notifications', notifications);
         return notifications;
       }),
       catchError((error) => throwError(() => error))
     );
+  }
+
+  getNotificationCount(): Observable<NotificationCount> {
+    const user = getUser();
+    const token = user?.token || '';
+
+    const url = `${BASE_URL}notifications/count`;
+    const config = {
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    return from(axios.get(url, config)).pipe(
+      map((response) => {
+        return {
+          count: response.data.data.notification_count,
+        } as NotificationCount;
+      }),
+      catchError((error) => throwError(() => error))
+    );
+  }
+
+  deleteNotification(id: number): void {
+    const user = getUser();
+    const token = user?.token || '';
+
+    const url = `${BASE_URL}notifications/${id}`;
+    const config = {
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios.delete(url, config);
   }
 }

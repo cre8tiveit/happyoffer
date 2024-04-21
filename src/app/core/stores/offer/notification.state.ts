@@ -7,16 +7,18 @@ import { Observable, Subject, filter, takeUntil, tap } from 'rxjs';
 import { DeleteNotification, GetNotifications } from './offer.actions';
 import { inspectStatus } from '../../helpers/rxjs.helper';
 import { NotificationService } from 'src/app/services/notification.service';
-import { Notification } from '../../types/types';
+import { Notification, NotificationCount } from '../../types/types';
 
 export interface NotificationStateModel {
   notifications: StateDataObject<Notification[]>;
+  count: StateDataObject<NotificationCount>;
 }
 
 @State<NotificationStateModel>({
   name: 'notification',
   defaults: {
     notifications: StateDataObjectHelper.getStateDataObject(),
+    count: StateDataObjectHelper.getStateDataObject(),
   },
 })
 @Injectable()
@@ -30,6 +32,13 @@ export class NotificationState implements OnDestroy {
     state: NotificationStateModel
   ): StateDataObject<Notification[]> {
     return state.notifications;
+  }
+
+  @Selector()
+  public static count(
+    state: NotificationStateModel
+  ): StateDataObject<NotificationCount> {
+    return state.count;
   }
 
   @Action(GetNotifications)
@@ -46,15 +55,31 @@ export class NotificationState implements OnDestroy {
     );
   }
 
+  @Action(GetNotifications)
+  public getNotificationsCount({
+    patchState,
+  }: StateContext<NotificationStateModel>): Observable<
+    StateDataObject<NotificationCount>
+  > {
+    return this.notificationService.getNotificationCount().pipe(
+      filter((notificationsCount) => !!notificationsCount),
+      inspectStatus(),
+      tap((result) => patchState({ count: result })),
+      takeUntil(this._unsubscribe)
+    );
+  }
+
   @Action(DeleteNotification)
-  public deleteClient(
+  public deleteNotification(
     { getState, patchState }: StateContext<NotificationStateModel>,
     { id }: DeleteNotification
   ) {
     const currentNotifications = getState().notifications?.data || [];
+    this.notificationService.deleteNotification(id);
     const updatedNotifications = currentNotifications.filter(
       (notification) => notification.id !== id
     );
+    console.log('updatedNotifications', updatedNotifications);
 
     patchState({
       notifications: {

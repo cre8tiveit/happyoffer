@@ -38,11 +38,15 @@
     @for (item of items; track item.title ) {
     <div
       (click)="navigate(item.url)"
-      class="flex flex-col justify-center items-center p-5"
+      class="flex flex-col justify-center items-center px-4 py-5"
       [ngClass]="item.classes"
     >
       <ng-icon [name]="item.icon" class="text-6xl"></ng-icon>
-      <div class="font-bold font-default">{{ item.title}}</div>
+      <div class="font-bold font-default">
+        {{ item.title }}
+
+        <span *ngIf="item?.badge !== 0">({{ item.badge }})</span>
+      </div>
     </div>
     }
   </div>

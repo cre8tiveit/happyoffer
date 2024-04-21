@@ -19,7 +19,8 @@ export class OfferPage implements OnInit {
     private readonly dataService: DataService
   ) {}
   ngOnInit(): void {
-    this.offer = this.dataService.getData();
+    this.offer = this.dataService.getData() || {};
+    console.log('offer', this.offer);
   }
 
   public goNotes(): void {

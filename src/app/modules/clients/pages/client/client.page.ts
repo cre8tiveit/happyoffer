@@ -100,7 +100,6 @@ export class ClientPage implements OnInit {
 
   public async onSubmit() {
     if (this.myForm.valid) {
-      console.log(this.myForm.value);
       const client: Client = {
         id: this.client?.id,
         name: this.myForm.value.name,

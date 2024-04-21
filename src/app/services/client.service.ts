@@ -69,7 +69,6 @@ export class ClientService {
       chamber_of_commerce_number: client.chamberOfCommerce,
       email: client.email,
     };
-    console.log(updatedData);
     axios.patch(url, updatedData, config);
   }
 
@@ -77,7 +76,6 @@ export class ClientService {
     const user = getUser();
     const url = `${BASE_URL}clients`;
     const config = getConfig(user);
-    console.log(user);
 
     const updatedData = {
       company_id: user?.company?.id,
@@ -122,7 +120,7 @@ export class ClientService {
               note: contact.attributes.note,
             } as Contact)
         );
-        console.log(contacts);
+
         return contacts;
       }),
       catchError((error) => throwError(() => error))

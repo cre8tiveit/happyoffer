@@ -43,6 +43,10 @@ export interface Notification {
   createdBy: string;
 }
 
+export interface NotificationCount {
+  count: number;
+}
+
 export interface Logging {
   id: number;
   name: string;

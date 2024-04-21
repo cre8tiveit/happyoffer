@@ -4,6 +4,7 @@ import {
   GetClients,
   GetLogging,
   GetNotifications,
+  GetNotificationsCount,
   GetOffers,
 } from './core/stores/offer/offer.actions';
 import { NotificationsService } from './services/notifications.service';
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit {
     this.store.dispatch(new GetClients());
     this.store.dispatch(new GetOffers());
     this.store.dispatch(new GetNotifications());
+    this.store.dispatch(new GetNotificationsCount());
     this.store.dispatch(new GetLogging());
   }
 }

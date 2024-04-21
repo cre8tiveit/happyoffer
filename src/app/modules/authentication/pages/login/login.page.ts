@@ -8,6 +8,7 @@ import {
   GetOffers,
   GetNotifications,
   GetLogging,
+  GetNotificationsCount,
 } from 'src/app/core/stores/offer/offer.actions';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -41,6 +42,7 @@ export class LoginPage implements OnInit {
     this.store.dispatch(new GetClients());
     this.store.dispatch(new GetOffers());
     this.store.dispatch(new GetNotifications());
+    this.store.dispatch(new GetNotificationsCount());
     this.store.dispatch(new GetLogging());
     this.router.navigate(['/home']);
   }

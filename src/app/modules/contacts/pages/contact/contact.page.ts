@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
+import {
+  AddContact,
+  EditContact,
+} from 'src/app/core/stores/offer/offer.actions';
+import { Contact } from 'src/app/core/types/types';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -11,6 +18,8 @@ export class ContactPage implements OnInit {
   public contactForm: FormGroup;
   public title = '';
   public editMode = false;
+  private contact = {} as Contact;
+  public gender: string = '';
 
   validations = {
     firstname: [{ type: 'required', message: 'First name is required.' }],
@@ -32,26 +41,32 @@ export class ContactPage implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private store: Store,
+    private nav: NavController,
     private dataService: DataService
   ) {
     this.editMode = !this.router.url.includes('add');
-    const contact = this.dataService.getData();
+    this.contact = this.dataService.getData();
+    this.gender = this.editMode ? this.contact.gender : 'male';
     this.contactForm = this.fb.group({
       firstname: [
-        this.editMode ? contact.firstname : '',
+        this.editMode ? this.contact.firstname : '',
         [Validators.required],
       ],
-      lastname: [this.editMode ? contact.lastname : '', [Validators.required]],
+      lastname: [
+        this.editMode ? this.contact.lastname : '',
+        [Validators.required],
+      ],
       phonenumber: [
-        this.editMode ? contact.phoneNumber : '',
-        [Validators.required, Validators.pattern('\\^+[1-9]d{1,14}$')],
-      ],
-      email: [this.editMode ? contact.email : '', [Validators.required]],
-      emailConfirmation: [
-        this.editMode ? contact.emailConfirmation : '',
+        this.editMode ? this.contact.phoneNumber : '',
         [Validators.required],
       ],
-      notes: [this.editMode ? contact.note : ''],
+      email: [this.editMode ? this.contact.email : '', [Validators.required]],
+      emailConfirmation: [
+        this.editMode ? this.contact.emailConfirmation : '',
+        [Validators.required],
+      ],
+      note: [this.editMode ? this.contact.note : ''],
     });
   }
 
@@ -87,12 +102,32 @@ export class ContactPage implements OnInit {
     {
       text: 'Confirm',
       handler: (value: any) => {
-        console.log(`You selected: ${value.languages.value}`);
+        this.gender = value.gender.value;
       },
     },
   ];
 
   public onSubmit() {
-    console.log(this.contactForm.value);
+    const clientId = this.dataService.getData().clientId;
+
+    if (this.contactForm.valid) {
+      const contact: Contact = {
+        id: this.contact.id,
+        firstname: this.contactForm.value.firstname,
+        lastname: this.contactForm.value.lastname,
+        email: this.contactForm.value.email,
+        emailConfirmation: this.contactForm.value.emailConfirmation,
+        phoneNumber: this.contactForm.value.phonenumber,
+        gender: this.gender,
+        note: this.contactForm.value.notes,
+      };
+
+      if (this.editMode) {
+        this.store.dispatch(new EditContact(contact));
+      } else {
+        this.store.dispatch(new AddContact(clientId, contact));
+      }
+      this.nav.back();
+    }
   }
 }

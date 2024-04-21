@@ -30,7 +30,10 @@ export interface ContactStateModel {
 export class ContactState implements OnDestroy {
   private readonly _unsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(private readonly clientService: ClientService) {}
+  constructor(
+    private readonly clientService: ClientService,
+    private readonly contactService: ContactService
+  ) {}
 
   @Selector()
   public static contacts(state: ContactStateModel): StateDataObject<Contact[]> {
@@ -42,7 +45,6 @@ export class ContactState implements OnDestroy {
     { patchState }: StateContext<ContactStateModel>,
     payload: { id: number }
   ): Observable<StateDataObject<Contact[]>> {
-    console.log('GetContacts', payload);
     return this.clientService.getContacts(payload.id).pipe(
       filter((contacts) => !!contacts),
       inspectStatus(),
@@ -54,10 +56,11 @@ export class ContactState implements OnDestroy {
   @Action(AddContact)
   public addContact(
     { getState, patchState }: StateContext<ContactStateModel>,
-    { contact }: AddContact
+    { clientId, contact }: AddContact
   ) {
     const currentContacts = getState().contacts?.data || [];
     const updatedContacts: Contact[] = [...currentContacts, contact];
+    this.contactService.add(clientId, contact);
 
     patchState({
       contacts: {
@@ -73,6 +76,7 @@ export class ContactState implements OnDestroy {
     { id }: DeleteContact
   ) {
     const currentContacts = getState().contacts?.data || [];
+
     const updatedContacts = currentContacts.filter(
       (contact) => contact.id !== id
     );
@@ -92,6 +96,7 @@ export class ContactState implements OnDestroy {
   ) {
     const currentContacts = getState().contacts?.data || [];
 
+    this.contactService.update(contact);
     const updatedContacts = currentContacts.map((existingContact) =>
       existingContact.id === contact.id ? contact : existingContact
     );
@@ -99,7 +104,7 @@ export class ContactState implements OnDestroy {
     patchState({
       contacts: {
         ...getState().contacts,
-        //data: updatedContacts,
+        data: updatedContacts,
       },
     });
   }
