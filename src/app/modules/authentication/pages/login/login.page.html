@@ -1,45 +1,95 @@
+<ion-header mode="ios">
+  @if (isIos) {
+  <div
+    class="bg-primary text-black flex justify-center items-center pt-16 py-4"
+  >
+    <img
+      src="assets/images/happyoffer.svg"
+      alt="logo"
+      width=""
+      height=""
+      class="w-5/12"
+    />
+  </div>
+  } @else if (isAndroid){
+  <div class="bg-primary text-black flex justify-center items-center h-32">
+    <img
+      src="assets/images/happyoffer.svg"
+      alt="logo"
+      width=""
+      height=""
+      class="w-5/12"
+    />
+  </div>
+  } @else {
+  <div class="bg-primary text-black flex justify-center items-center h-32">
+    <img
+      src="assets/images/happyoffer.svg"
+      alt="logo"
+      width=""
+      height=""
+      class="w-5/12"
+    />
+  </div>
+  }
+</ion-header>
 <ion-content [fullscreen]="true">
-  <div class="h-28 bg-primary flex justify-center items-center">Happyoffer</div>
   <div class="p-5">
-    <div class="text-3xl">Login</div>
-
     <form [formGroup]="loginForm">
       <div class="mt-5">
         <ion-label position="floating">Email</ion-label>
 
         <div class="rounded-md border-gray-300 border-2 mt-2 px-2">
-          <ion-input formControlName="email" type="email"></ion-input>
+          <ion-input
+            formControlName="email"
+            type="email"
+            (ionInput)="clearError()"
+          ></ion-input>
         </div>
-        @if (loginForm.controls.email.invalid && (loginForm.controls.email.dirty
-        || loginForm.controls.email.touched)) {
-        <p
-          *ngIf="loginForm.controls.email.errors.required"
-          class="text-red-500"
-        >
-          Email is required.
-        </p>
-        <p *ngIf="loginForm.controls.email.errors.email" class="text-red-500">
-          Enter a valid email.
-        </p>
-        }
+        <div class="h-4">
+          @if (loginForm.controls.email.invalid &&
+          (loginForm.controls.email.dirty || loginForm.controls.email.touched))
+          {
+          <p
+            *ngIf="loginForm.controls.email.errors.required"
+            class="text-red-500"
+          >
+            Email is required.
+          </p>
+          <p *ngIf="loginForm.controls.email.errors.email" class="text-red-500">
+            Enter a valid email.
+          </p>
+          }
+        </div>
       </div>
       <div class="mt-5">
         <ion-label position="floating">Password</ion-label>
         <div class="rounded-md border-gray-300 border-2 mt-2 px-2">
-          <ion-input formControlName="password" type="password"></ion-input>
+          <ion-input
+            formControlName="password"
+            type="password"
+            (ionInput)="clearError()"
+          ></ion-input>
         </div>
-        @if(loginForm.controls.password.invalid &&
-        (loginForm.controls.password.dirty ||
-        loginForm.controls.password.touched)) {
-        <p
-          *ngIf="loginForm.controls.password.errors.required"
-          class="text-red-500"
-        >
-          Password is required.
-        </p>
+        <div class="h-4">
+          @if(loginForm.controls.password.invalid &&
+          (loginForm.controls.password.dirty ||
+          loginForm.controls.password.touched)) {
+          <p
+            *ngIf="loginForm.controls.password.errors.required"
+            class="text-red-500 font-default"
+          >
+            Password is required.
+          </p>
+          }
+        </div>
+      </div>
+      <div class="h-6">
+        @if (error) {
+        <p class="text-red-500 font-default">Password or email is incorrect.</p>
         }
       </div>
-      <div class="mt-10">
+      <div class="mt-5">
         <ion-button
           expand="full"
           color="primary"

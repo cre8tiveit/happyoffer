@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "223887775459",
+    "project_id": "happyoffer-fee6f",
+    "storage_bucket": "happyoffer-fee6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223887775459:android:72a2787273ed2e98ae97d6",
+        "android_client_info": {
+          "package_name": "app.happoffer.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrp0bPzOEz6aH_mdHytwYmxUV7Vwl6wHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -20,7 +20,7 @@ const routes: Routes = [
           import('./modules/home/home.module').then((m) => m.HomePageModule),
       },
       {
-        path: 'login',
+        path: 'auth',
         loadChildren: () =>
           import('./modules/authentication/authentication.module').then(
             (m) => m.AuthenticationModule

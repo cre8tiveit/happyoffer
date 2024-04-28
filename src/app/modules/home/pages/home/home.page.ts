@@ -84,7 +84,6 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.notificationsCount$.subscribe((notificationsCount) => {
       this.notificationsCount = notificationsCount.data as NotificationCount;
-      console.log('notifications', this.notificationsCount);
       this.items[3].badge = this.notificationsCount.count;
     });
 

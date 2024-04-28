@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'nl.happyoffer.app',
+  appId: 'app.happyoffer.app',
   appName: 'Happyoffer',
   webDir: 'www',
   server: {

@@ -20,6 +20,7 @@ export class ContactPage implements OnInit {
   public editMode = false;
   private contact = {} as Contact;
   public gender: string = '';
+  public toastMessage = '';
 
   validations = {
     firstname: [{ type: 'required', message: 'First name is required.' }],
@@ -123,8 +124,10 @@ export class ContactPage implements OnInit {
       };
 
       if (this.editMode) {
+        this.toastMessage = 'Contact updated successfully.';
         this.store.dispatch(new EditContact(contact));
       } else {
+        this.toastMessage = 'Contact successfully added.';
         this.store.dispatch(new AddContact(clientId, contact));
       }
       this.nav.back();

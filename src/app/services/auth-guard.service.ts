@@ -22,10 +22,11 @@ export class AuthGuardService implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const isAuthenticated = true;
+    const isAuthenticated = localStorage.getItem('user') !== null;
+    console.log('isAuthenticated', isAuthenticated);
 
     if (!isAuthenticated) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/auth']);
       return false;
     }
 

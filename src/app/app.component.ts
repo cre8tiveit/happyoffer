@@ -9,6 +9,7 @@ import {
 } from './core/stores/offer/offer.actions';
 import { NotificationsService } from './services/notifications.service';
 import { Capacitor } from '@capacitor/core';
+import { initializeApp } from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -21,15 +22,12 @@ export class AppComponent implements OnInit {
     private readonly notificationsService: NotificationsService
   ) {}
   ngOnInit(): void {
-    if (Capacitor.isNativePlatform()) {
-      this.notificationsService.registerNotifications();
-      this.notificationsService.addListeners();
+    if (localStorage.getItem('user') !== null) {
+      this.store.dispatch(new GetClients());
+      this.store.dispatch(new GetOffers());
+      this.store.dispatch(new GetNotifications());
+      this.store.dispatch(new GetNotificationsCount());
+      this.store.dispatch(new GetLogging());
     }
-
-    this.store.dispatch(new GetClients());
-    this.store.dispatch(new GetOffers());
-    this.store.dispatch(new GetNotifications());
-    this.store.dispatch(new GetNotificationsCount());
-    this.store.dispatch(new GetLogging());
   }
 }

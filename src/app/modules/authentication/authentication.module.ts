@@ -5,8 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { LoginPage } from './pages/login/login.page';
+import { PushNotificationsPage } from './pages/push/push.page';
+import { NgIconsModule } from '@ng-icons/core';
+import { heroBellAlert } from '@ng-icons/heroicons/outline';
 
-const routes: Routes = [{ path: '', component: LoginPage }];
+const routes: Routes = [
+  { path: '', component: LoginPage },
+  { path: 'push', component: PushNotificationsPage },
+];
 
 @NgModule({
   imports: [
@@ -15,8 +21,11 @@ const routes: Routes = [{ path: '', component: LoginPage }];
     IonicModule,
     SharedModule,
     ReactiveFormsModule,
+    NgIconsModule.withIcons({
+      heroBellAlert,
+    }),
     RouterModule.forChild(routes),
   ],
-  declarations: [LoginPage],
+  declarations: [LoginPage, PushNotificationsPage],
 })
 export class AuthenticationModule {}

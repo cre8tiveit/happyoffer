@@ -7,6 +7,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
+  <ion-toast
+    trigger="open-toast"
+    [message]="toastMessage"
+    [duration]="2000"
+    position="top"
+  />
   <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="mx-5">
     <div class="mt-5 border border-1 border-gray-400 px-2 rounded-md">
       <ion-input
@@ -147,7 +153,7 @@
       />
     </div>
 
-    <div class="mt-10">
+    <div class="mt-10" id="open-toast">
       <ion-button type="submit" expand="full" color="primary" shape="round"
         >Save</ion-button
       >

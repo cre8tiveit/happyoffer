@@ -41,12 +41,17 @@
       class="flex flex-col justify-center items-center px-4 py-5"
       [ngClass]="item.classes"
     >
-      <ng-icon [name]="item.icon" class="text-6xl"></ng-icon>
-      <div class="font-bold font-default">
-        {{ item.title }}
-
-        <span *ngIf="item?.badge !== 0">({{ item.badge }})</span>
+      <div class="relative">
+        <!-- <span *ngIf="item?.badge !== 0">({{ item.badge }})</span> -->
+        <ng-icon [name]="item.icon" class="text-6xl"></ng-icon>
+        <span
+          *ngIf="item?.badge !== 0"
+          class="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs"
+        >
+          {{ item.badge }}
+        </span>
       </div>
+      <div class="font-bold font-default">{{ item.title }}</div>
     </div>
     }
   </div>

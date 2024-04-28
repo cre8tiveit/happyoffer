@@ -15,7 +15,8 @@ import { DataService } from 'src/app/services/data.service';
 export class ContactsPage implements OnInit {
   public contacts: Contact[] = [];
   public filteredContacts: Contact[] = [];
-  public clientId: string | null = '';
+  public clientId: string = '';
+  public clientName: string = '';
 
   @Select(ContactState.contacts) public readonly contacts$: Observable<
     StateDataObject<Contact[]>
@@ -27,9 +28,9 @@ export class ContactsPage implements OnInit {
     private readonly dataService: DataService
   ) {}
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.clientId = params.get('id');
-    });
+    const { clientId, clientName } = this.dataService.getData();
+    this.clientId = clientId;
+    this.clientName = clientName;
 
     this.contacts$.subscribe((contacts) => {
       const c: Contact[] =

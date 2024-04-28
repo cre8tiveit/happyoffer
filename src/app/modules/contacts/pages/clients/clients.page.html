@@ -14,7 +14,7 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     @for (client of filterdClients; track client.id) {
-    <ion-item detail (click)="goContacts(client.id)"
+    <ion-item detail (click)="goContacts(client)"
       ><ion-label>{{client.name}}</ion-label></ion-item
     >
     }

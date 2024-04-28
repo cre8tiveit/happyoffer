@@ -6,6 +6,7 @@ import { ClientState } from 'src/app/core/stores/offer/client.state';
 import { GetContacts } from 'src/app/core/stores/offer/offer.actions';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 import { Client } from 'src/app/core/types/types';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-clients',
@@ -17,7 +18,11 @@ export class ClientsPage implements OnInit {
     StateDataObject<Client[]>
   >;
 
-  constructor(private readonly router: Router, private readonly store: Store) {}
+  constructor(
+    private readonly router: Router,
+    private readonly store: Store,
+    private readonly dataService: DataService
+  ) {}
 
   ngOnInit(): void {
     this.clients$.subscribe((clients) => {
@@ -40,7 +45,10 @@ export class ClientsPage implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  public goContacts(id: number): void {
+  public goContacts(client: Client): void {
+    const id = client.id ? client.id : 0;
+    const name = client.name ? client.name : '';
+    this.dataService.setData({ clientId: id, clientName: name });
     this.store.dispatch(new GetContacts(id));
     this.router.navigate([`/contacts/client/${id}`]);
   }
