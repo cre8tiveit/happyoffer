@@ -43,7 +43,7 @@ ion-label {
 
 
 ion-button {
-    font-family: "Montserrat";
+    font-family: "Montserrat" ;
     font-weight: 600;
 }
 
@@ -60,5 +60,13 @@ ion-back-button {
 ion-title {
     font-family: 'Montserrat';
     font-weight: 600;
+}
 
+div.push {
+    font-family: 'Montserrat';
+    font-weight: 600;
+}
+
+ion-tab-button.tab-selected ng-icon {
+    color: #ffd31d;
 }

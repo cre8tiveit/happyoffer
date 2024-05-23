@@ -24,7 +24,6 @@ export class ContactService {
       phone_number: phoneNumber,
       email_confirmation: emailConfirmation,
     };
-    console.log(updatedData);
     axios.patch(url, updatedData, config);
   }
 

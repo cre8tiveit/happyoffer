@@ -44,9 +44,10 @@ export class ClientService {
               country: client.attributes.country,
               websiteUrl: client.attributes.website_url,
               logo: client.attributes.logo,
+              deletedAt: client.attributes.deleted_at,
             } as Client)
         );
-        return clients;
+        return clients.filter((client: Client) => !client.deletedAt);
       }),
       catchError((error) => throwError(() => error))
     );
@@ -118,10 +119,11 @@ export class ClientService {
               emailConfirmation: contact.attributes.email_confirmation,
               phoneNumber: contact.attributes.phone_number,
               note: contact.attributes.note,
+              deletedAt: contact.attributes.deleted_at,
             } as Contact)
         );
 
-        return contacts;
+        return contacts.filter((contact: Contact) => !contact.deletedAt);
       }),
       catchError((error) => throwError(() => error))
     );

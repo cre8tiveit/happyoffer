@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { ClientsPage } from '../clients/clients.page';
 import { Offer } from 'src/app/core/types/types';
 import { OfferState } from 'src/app/core/stores/offer/offer.state';
 import { Observable } from 'rxjs';
@@ -14,7 +13,7 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: 'offers.page.html',
   styleUrls: ['offers.page.scss'],
 })
-export class OffersPage implements OnInit {
+export class OffersNotificationPage implements OnInit {
   @Select(OfferState.offers) public readonly offers$: Observable<
     StateDataObject<Offer[]>
   >;
@@ -30,7 +29,11 @@ export class OffersPage implements OnInit {
 
   ngOnInit(): void {
     this.offers$.subscribe((offers) => {
-      this.offers = (offers.data as Offer[])
+      this.offers = offers.data as Offer[];
+      this.offers = this.offers.map((offer) => {
+        return Object.assign({}, offer, { pushNotification: true });
+      });
+
       this.filteredOffers = this.offers;
     });
   }
@@ -44,14 +47,6 @@ export class OffersPage implements OnInit {
     this.isFilterVisible = !this.isFilterVisible;
   }
 
-  async openModal() {
-    const modal = await this.modalCtrl.create({
-      component: ClientsPage,
-    });
-    modal.present();
-    const { data, role } = await modal.onWillDismiss();
-  }
-
   public search($event: any) {
     const value = $event.target.value;
     this.filteredOffers = this.offers.filter(
@@ -59,5 +54,10 @@ export class OffersPage implements OnInit {
         offer.client.name.toLowerCase().includes(value.toLowerCase()) ||
         offer.name.toLowerCase().includes(value.toLowerCase())
     );
+  }
+
+  public toggleNotification(offer: Offer): void {
+    console.log('toggleNotification', offer);
+    //offer.pushNotification = !offer.pushNotification;
   }
 }

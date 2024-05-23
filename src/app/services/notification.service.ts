@@ -34,6 +34,7 @@ export class NotificationService {
               message: notification.attributes.message,
               type: notification.attributes.type,
               read: notification.attributes.read,
+              created: notification.attributes.created_at,
               createdAt: format(
                 notification.attributes.created_at,
                 'dd-MM-yyyy HH:mm'
@@ -44,7 +45,10 @@ export class NotificationService {
               createdBy: notification.attributes.created_by,
             } as Notification)
         );
-        return notifications;
+        return (notifications as Notification[]).sort(
+          (a, b) =>
+            new Date(b.created).getTime() - new Date(a.created).getTime()
+        );
       }),
       catchError((error) => throwError(() => error))
     );

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button text=""></ion-back-button>
@@ -7,6 +7,13 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+   <ion-toast
+    trigger="open-toast"
+    [message]="toastMessage"
+    [duration]="5000"
+    color="success"
+    position="top"
+  />
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="mx-5">
     <div class="mt-5 border border-1 border-black px-2 rounded-md">
       <ion-input
@@ -219,7 +226,7 @@
       </ng-container>
     </div>
     <div class="my-10">
-      <ion-button type="submit" expand="full" shape="round" color="primary"
+      <ion-button type="submit" expand="full" shape="round" color="primary" id="open-toast"
         >Save</ion-button
       >
     </div>

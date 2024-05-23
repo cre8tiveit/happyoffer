@@ -21,6 +21,7 @@ export interface Client {
   country: string;
   websiteUrl: string;
   logo?: string;
+  deletedAt?: string;
 }
 
 export interface Contact {
@@ -31,10 +32,21 @@ export interface Contact {
   email: string;
   emailConfirmation: string;
   phoneNumber: string;
+  deletedAt?: string;
   note: string;
 }
 
 export interface Notification {
+  id: number;
+  message: string;
+  created: string;
+  createdAt: string;
+  updatedAt: Date;
+  offerId: number;
+  createdBy: string;
+}
+
+export interface Note {
   id: number;
   message: string;
   createdAt: string;
@@ -75,4 +87,5 @@ export interface Offer {
   url: string;
   client: Client;
   contact?: Contact;
+  pushNotification?: boolean;
 }

@@ -7,8 +7,12 @@ import { SharedModule } from '../shared/shared.module';
 import { SettingsPage } from './pages/settings/settings.page';
 import { heroHomeSolid } from '@ng-icons/heroicons/solid';
 import { NgIconsModule } from '@ng-icons/core';
+import { OffersNotificationPage } from './pages/offers/offers.page';
 
-const routes: Routes = [{ path: '', component: SettingsPage }];
+const routes: Routes = [
+  { path: '', component: SettingsPage },
+  { path: 'offers', component: OffersNotificationPage },
+];
 
 @NgModule({
   imports: [
@@ -21,6 +25,6 @@ const routes: Routes = [{ path: '', component: SettingsPage }];
       heroHomeSolid,
     }),
   ],
-  declarations: [SettingsPage],
+  declarations: [SettingsPage, OffersNotificationPage],
 })
 export class SettingsPageModule {}

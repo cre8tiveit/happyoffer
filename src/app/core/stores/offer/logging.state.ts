@@ -31,7 +31,7 @@ export class LoggingState implements OnDestroy {
     return state.logging;
   }
 
-  @Action(GetNotifications)
+  
   public GetLogging({
     patchState,
   }: StateContext<LoggingStateModel>): Observable<StateDataObject<Logging[]>> {

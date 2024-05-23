@@ -7,7 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { OffersPage } from './pages/offers/offers.page';
 import { OfferPage } from './pages/offer/offer.page';
 import { heroHomeSolid } from '@ng-icons/heroicons/solid';
-import { heroFunnel } from '@ng-icons/heroicons/outline';
+import { heroArrowTopRightOnSquare, heroFunnel, heroPencil } from '@ng-icons/heroicons/outline';
 import { NgIconsModule } from '@ng-icons/core';
 import { NotesPage } from './pages/notes/notes.page';
 import { ClientsPage } from './pages/clients/clients.page';
@@ -28,6 +28,8 @@ const routes: Routes = [
     NgIconsModule.withIcons({
       heroHomeSolid,
       heroFunnel,
+      heroPencil,
+      heroArrowTopRightOnSquare
     }),
   ],
   declarations: [OffersPage, OfferPage, NotesPage, ClientsPage],

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -10,9 +10,13 @@
 <ion-content [fullscreen]="true">
   <div class="p-5">
     <div class="mt-10 flex-col items-center justify-center text-center">
-      <ng-icon name="heroBellAlert" class="text-8xl my-20" />
+      <ng-icon name="heroBellAlert" class="text-8xl mt-20 mb-10" />
+      <div class="mb-20 mx-10 text-default push">
+        Happy Offer would like to send you push notifications. Continue to give
+        consent.
+      </div>
       <ion-button expand="full" color="primary" shape="round" (click)="next()"
-        >Next</ion-button
+        >Continue</ion-button
       >
     </div>
   </div></ion-content

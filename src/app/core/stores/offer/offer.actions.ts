@@ -58,3 +58,8 @@ export class GetLogging {
 export class GetOffers {
   public static readonly type = '[Client] Get offers';
 }
+
+export class GetNotes {
+  public static readonly type = '[Client] Get notes';
+  constructor(public id: number) {}
+}

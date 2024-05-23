@@ -5,7 +5,6 @@ import { NavController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { AddClient, EditClient } from 'src/app/core/stores/offer/offer.actions';
 import { Client } from 'src/app/core/types/types';
-import { ClientService } from 'src/app/services/client.service';
 import { DataService } from 'src/app/services/data.service';
 
 interface Validations {
@@ -24,6 +23,7 @@ export class ClientPage implements OnInit {
   myForm: FormGroup = {} as FormGroup;
   title = '';
   editMode = false;
+  toastMessage = '';  
 
   validations = {
     name: [{ type: 'required', message: 'Username is required.' }],
@@ -114,13 +114,14 @@ export class ClientPage implements OnInit {
         websiteUrl: this.myForm.value.url,
       };
       if (this.editMode) {
+        this.toastMessage = 'Client updated successfully.';
+        console.log('Client updated', this.toastMessage);
         this.store.dispatch(new EditClient(client));
       } else {
+         this.toastMessage = 'Client successfully added.';
         this.store.dispatch(new AddClient(client));
       }
-      this.navController.pop();
-    } else {
-      console.log('Form is invalid');
-    }
+      this.navController.back();
+    } 
   }
 }

@@ -5,6 +5,8 @@ PODS:
     - Capacitor
   - CapacitorBrowser (6.0.0):
     - Capacitor
+  - CapacitorClipboard (6.0.0):
+    - Capacitor
   - CapacitorCordova (6.0.0)
   - CapacitorFirebaseMessaging (6.0.0):
     - Capacitor
@@ -75,6 +77,7 @@ DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
   - "CapacitorBrowser (from `../../node_modules/@capacitor/browser`)"
+  - "CapacitorClipboard (from `../../node_modules/@capacitor/clipboard`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorFirebaseMessaging (from `../../node_modules/@capacitor-firebase/messaging`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
@@ -99,6 +102,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/app"
   CapacitorBrowser:
     :path: "../../node_modules/@capacitor/browser"
+  CapacitorClipboard:
+    :path: "../../node_modules/@capacitor/clipboard"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorFirebaseMessaging:
@@ -114,6 +119,7 @@ SPEC CHECKSUMS:
   Capacitor: 559d073c4ca6c27f8e7002c807eea94c3ba435a9
   CapacitorApp: 9d53aec7101f7b030a950c5bdc4df8612576b279
   CapacitorBrowser: 7e1e2cdbb3e372f09f0bad0c4c21a6d187b679ad
+  CapacitorClipboard: 80282f684154124b9019ebf401235b70b0cf4994
   CapacitorCordova: 8c4bfdf69368512e85b1d8b724dd7546abeb30af
   CapacitorFirebaseMessaging: 449f81e1fffcee3f3934680200742d148b9f269e
   CapacitorHaptics: 9ebc9363f0e9b8eb4295088a0b474530acf1859b
@@ -128,6 +134,6 @@ SPEC CHECKSUMS:
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
 
-PODFILE CHECKSUM: 60c5a165d348a26709eb30873afb3a49e9a9ec44
+PODFILE CHECKSUM: 514cf45c78a5175298d42dcff0fea25a67ab6f68
 
 COCOAPODS: 1.12.1

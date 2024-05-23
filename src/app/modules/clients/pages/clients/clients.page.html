@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button text="Back"></ion-back-button>
@@ -17,11 +17,11 @@
   <ion-list>
     @for (client of filterdClients; track client.id) {
     <ion-item (click)="showClientDetails(client)" detail>
-      <ion-avatar slot="start" class="flex items-center">
+      <!-- <ion-avatar slot="start" class="flex items-center">
         @if (!client.logo?.endsWith('storage/')) {
         <img src="{{client.logo}}" alt="logo" />
         }
-      </ion-avatar>
+      </ion-avatar> -->
       <ion-label>{{client.name}}</ion-label>
     </ion-item>
     }

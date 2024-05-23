@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start"> </ion-buttons>
     <ion-title>Offers</ion-title>
@@ -65,11 +65,33 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     @for ( offer of filteredOffers; track offer.id) {
-    <div class="mb-5 px-5 py-2 even:bg-gray-200" (click)="showDetails(offer)">
-      <div>{{ offer.offerNumber }} | {{ offer.contact?.firstname }}</div>
+    <div
+      class="px-5 py-2 even:bg-gray-200 border-b border-gray-300"
+      (click)="showDetails(offer)"
+    >
+      <div class="flex justify-between items-center">
+        <div>{{ offer.offerNumber }} </div>
+        <div>
+          @if(offer.offerStatus === 'Not Yet Send') {<ion-badge color="open"
+            >Open</ion-badge 
+            >}
+          @if(offer.offerStatus === 'Opened') {<ion-badge color="tertiary"
+            >Opened</ion-badge
+          >
+          } @if(offer.offerStatus === 'Accepted') {<ion-badge color="success"
+            >Accepted</ion-badge
+          >
+          } @if(offer.offerStatus === 'Rejected') {<ion-badge color="danger"
+            >Rejected</ion-badge
+          >
+          }
+        </div>
+      </div>
       <div class="font-bold">{{ offer.name }}</div>
-      <div>{{ offer.nameContactPerson }}</div>
-      <div>Offer made at {{ offer.offerDate}}</div>
+      <div class="flex justify-between items-center">
+        <div>{{ offer.client.name }}</div>
+        <div>{{ offer.offerDate.split(' ')[0]}}</div>
+      </div>
     </div>
     }
   </ion-list>

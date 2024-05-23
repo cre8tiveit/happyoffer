@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button text=""></ion-back-button>
@@ -10,7 +10,8 @@
   <ion-toast
     trigger="open-toast"
     [message]="toastMessage"
-    [duration]="2000"
+    [duration]="5000"
+    color="success"
     position="top"
   />
   <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="mx-5">

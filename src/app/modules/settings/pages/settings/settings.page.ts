@@ -14,4 +14,13 @@ export class SettingsPage {
   public goHome(): void {
     this.router.navigate(['/home']);
   }
+
+  public goOffers(): void {
+    this.router.navigate(['/settings/offers']);
+  }
+
+  public logOff(): void {
+    localStorage.removeItem('user');
+    this.router.navigate(['']);
+  }
 }

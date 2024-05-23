@@ -6,34 +6,37 @@ import {
   GetTokenOptions,
 } from '@capacitor-firebase/messaging';
 import { initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-push',
   templateUrl: 'push.page.html',
 })
 export class PushNotificationsPage {
-  constructor(private readonly router: Router) {
-    const firebaseConfig = {
-      apiKey: 'AIzaSyCjYxomqBfdyWyrp-DDZK8eorhs_purXaE',
-      authDomain: 'happyoffer-fee6f.firebaseapp.com',
-      projectId: 'happyoffer-fee6f',
-      storageBucket: 'happyoffer-fee6f.appspot.com',
-      messagingSenderId: '223887775459',
-      appId: '1:223887775459:web:a541eda714c4157aae97d6',
-      measurementId: 'G-M2PPV9365W',
-    };
-    const app = initializeApp(firebaseConfig);
+  constructor(private readonly router: Router, private readonly userService: UserService) {
+    const app = initializeApp(environment.firebase);
 
     FirebaseMessaging.addListener('notificationReceived', (event) => {
       console.log('notificationReceived: ', { event });
     });
+
     FirebaseMessaging.addListener('notificationActionPerformed', (event) => {
       console.log('notificationActionPerformed: ', { event });
     });
   }
 
   public async next(): Promise<void> {
-    await FirebaseMessaging.requestPermissions();
+    if (Capacitor.isNativePlatform()) {
+      await FirebaseMessaging.requestPermissions();
+      await this.getToken();
+    }
     this.router.navigate(['/home']);
+  }
+
+  public async getToken(): Promise<void> {
+    const { token } = await FirebaseMessaging.getToken();
+    console.log('Token: ', token);
+    this.userService.saveToken(token)
   }
 }

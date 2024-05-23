@@ -36,8 +36,6 @@ export class NotificationsPage implements OnInit {
   }
 
   public showOffer(offerId: number): void {
-    console.log('notification', offerId);
-    offerId = 1;
     this.navController.navigateForward(`/offers/${offerId}`);
   }
 }

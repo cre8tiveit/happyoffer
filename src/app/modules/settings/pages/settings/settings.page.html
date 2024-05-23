@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start"> </ion-buttons>
     <ion-title>Settings</ion-title>
@@ -6,15 +6,25 @@
 </ion-header>
 <ion-content>
   <ion-list class="mt-5">
+    <ion-list-header>Notifications settings</ion-list-header>
     <ion-item>
       <ion-label>Notifications for every offer</ion-label>
-      <ion-toggle [(ngModel)]="everyNotification" slot="end"></ion-toggle>
+      <ion-toggle [(ngModel)]="everyNotification" slot="end" color="success"></ion-toggle>
     </ion-item>
   </ion-list>
 
   @if (!everyNotification) {
-  <ion-button color="primary" expand="block" class="mx-5 mt-5">
+  <ion-button color="primary" expand="block" class="mx-5 mt-5" (click)="goOffers()">
     Set notifications per offer
   </ion-button>
   }
+
+  
 </ion-content>
+<ion-footer>
+  <div class="mx-5 my-10">
+    <ion-button expand="full" color="danger" shape="round" (click)="logOff()"
+      >Log off</ion-button
+    >
+  </div>
+</ion-footer>
