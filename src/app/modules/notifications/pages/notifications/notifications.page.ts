@@ -26,7 +26,6 @@ export class NotificationsPage implements OnInit {
   ngOnInit(): void {
     this.notifications$.subscribe((notifications) => {
       this.notifications = notifications.data as Notification[];
-      console.log('notifications', this.notifications);
     });
   }
 
@@ -36,6 +35,6 @@ export class NotificationsPage implements OnInit {
   }
 
   public showOffer(offerId: number): void {
-    this.navController.navigateForward(`/offers/${offerId}`);
+    this.navController.navigateForward(`notifications/offer/${offerId}`);
   }
 }

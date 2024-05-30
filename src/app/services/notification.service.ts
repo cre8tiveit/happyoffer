@@ -4,26 +4,17 @@ import { Injectable } from '@angular/core';
 
 import { Observable, catchError, from, map, throwError } from 'rxjs';
 import { Notification, NotificationCount } from '../core/types/types';
-import { getUser } from '../core/helpers/api.helper';
+import { getConfig } from '../core/helpers/api.helper';
 import { BASE_URL } from '../core/const';
 import { format } from 'date-fns';
-import { DeleteNotification } from '../core/stores/offer/offer.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationService {
   getNotifications(): Observable<Notification[]> {
-    const user = getUser();
-    const token = user?.token || '';
-
     const url = `${BASE_URL}notifications`;
-    const config = {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
+    const config = getConfig();
 
     return from(axios.get(url, config)).pipe(
       map((response) => {
@@ -55,16 +46,8 @@ export class NotificationService {
   }
 
   getNotificationCount(): Observable<NotificationCount> {
-    const user = getUser();
-    const token = user?.token || '';
-
     const url = `${BASE_URL}notifications/count`;
-    const config = {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
+    const config = getConfig();
 
     return from(axios.get(url, config)).pipe(
       map((response) => {
@@ -77,17 +60,27 @@ export class NotificationService {
   }
 
   deleteNotification(id: number): void {
-    const user = getUser();
-    const token = user?.token || '';
-
     const url = `${BASE_URL}notifications/${id}`;
-    const config = {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
+    const config = getConfig();
     axios.delete(url, config);
+  }
+
+  turnOffNotificationForOffer(id: string): void {
+    const url = `${BASE_URL}notifications`;
+    const config = getConfig();
+    const data = {
+      offer_id: id,
+    };
+    axios.post(url, data, config);
+  }
+
+  turnOnNotificationForOffer(id: string): void {
+    const url = `${BASE_URL}notifications/${id}`;
+    const config = getConfig();
+    axios.delete(url, config);
+  }
+
+  getBlacklistedOffers(): String[] {
+    return ['56'];
   }
 }

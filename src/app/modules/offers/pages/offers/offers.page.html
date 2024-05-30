@@ -33,9 +33,30 @@
     </div>
     <div class="mt-5 flex flex-col">
       <ion-label class="font-bold">Status</ion-label>
-      <ion-checkbox class="mt-2">In progress</ion-checkbox>
-      <ion-checkbox class="mt-2">Accepted</ion-checkbox>
-      <ion-checkbox class="mt-2">Rejected</ion-checkbox>
+      <ion-checkbox
+        class="mt-2"
+        (ionChange)="toggleFilterStatus('Accepted')"
+        [checked]="getFilterStatus('Accepted')"
+        >Accepted</ion-checkbox
+      >
+      <ion-checkbox
+        class="mt-2"
+        [checked]="getFilterStatus('Not Yet Send')"
+        (ionChange)="toggleFilterStatus('Not Yet Send')"
+        >Open</ion-checkbox
+      >
+      <ion-checkbox
+        class="mt-2"
+        (ionChange)="toggleFilterStatus('Opened')"
+        [checked]="getFilterStatus('Opened')"
+        >Opened</ion-checkbox
+      >
+      <ion-checkbox
+        class="mt-2"
+        (ionChange)="toggleFilterStatus('Rejected')"
+        [checked]="getFilterStatus('Rejected')"
+        >Rejected</ion-checkbox
+      >
     </div>
 
     <div class="mt-5">
@@ -44,14 +65,34 @@
       </ion-button>
     </div>
 
+    <div class="mt-5">
+      <ion-button
+        expand="full"
+        fill="clear"
+        color="secondary"
+        (click)="resetFilter()"
+        >Reset
+      </ion-button>
+    </div>
+
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime id="datetime-from" presentation="date"></ion-datetime>
+        <ion-datetime
+          id="datetime-from"
+          presentation="date"
+          displayFormat="DD-MM-YYYY"
+          [(ngModel)]="filterStartDate"
+        ></ion-datetime>
       </ng-template>
     </ion-modal>
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime id="datetime-til" presentation="date"></ion-datetime>
+        <ion-datetime
+          id="datetime-til"
+          presentation="date"
+          displayFormat="DD-MM-YYYY"
+          [(ngModel)]="filterEndDate"
+        ></ion-datetime>
       </ng-template>
     </ion-modal>
   </div>
@@ -70,12 +111,11 @@
       (click)="showDetails(offer)"
     >
       <div class="flex justify-between items-center">
-        <div>{{ offer.offerNumber }} </div>
+        <div>{{ offer.offerNumber }}</div>
         <div>
           @if(offer.offerStatus === 'Not Yet Send') {<ion-badge color="open"
-            >Open</ion-badge 
-            >}
-          @if(offer.offerStatus === 'Opened') {<ion-badge color="tertiary"
+            >Open</ion-badge
+          >} @if(offer.offerStatus === 'Opened') {<ion-badge color="tertiary"
             >Opened</ion-badge
           >
           } @if(offer.offerStatus === 'Accepted') {<ion-badge color="success"

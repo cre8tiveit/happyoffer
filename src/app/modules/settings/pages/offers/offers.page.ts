@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
 import { Offer } from 'src/app/core/types/types';
 import { OfferState } from 'src/app/core/stores/offer/offer.state';
 import { Observable } from 'rxjs';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 import { Select } from '@ngxs/store';
-import { DataService } from 'src/app/services/data.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-offers',
@@ -21,30 +19,23 @@ export class OffersNotificationPage implements OnInit {
   public offers: Offer[] = [];
   public filteredOffers: Offer[] = [];
 
-  constructor(
-    private readonly router: Router,
-    private modalCtrl: ModalController,
-    private readonly dataService: DataService
-  ) {}
+  constructor(private readonly notificationService: NotificationService) {}
 
   ngOnInit(): void {
     this.offers$.subscribe((offers) => {
       this.offers = offers.data as Offer[];
-      this.offers = this.offers.map((offer) => {
-        return Object.assign({}, offer, { pushNotification: true });
+
+      const blacklistedOffers = this.notificationService.getBlacklistedOffers();
+      const updatedOffers = this.offers.map((offer) => {
+        return {
+          ...offer,
+          isBlacklisted: blacklistedOffers.includes(offer.id),
+        };
       });
 
+      this.offers = updatedOffers;
       this.filteredOffers = this.offers;
     });
-  }
-
-  public showDetails(offer: Offer): void {
-    this.dataService.setData(offer);
-    this.router.navigate([`/offers/${offer.id}`]);
-  }
-
-  public toggleFilter() {
-    this.isFilterVisible = !this.isFilterVisible;
   }
 
   public search($event: any) {
@@ -56,8 +47,12 @@ export class OffersNotificationPage implements OnInit {
     );
   }
 
-  public toggleNotification(offer: Offer): void {
-    console.log('toggleNotification', offer);
-    //offer.pushNotification = !offer.pushNotification;
+  public toggleNotification($event: any, id: string): void {
+    const { checked } = $event.detail;
+    if (checked) {
+      this.notificationService.turnOnNotificationForOffer(id);
+    } else {
+      this.notificationService.turnOffNotificationForOffer(id);
+    }
   }
 }

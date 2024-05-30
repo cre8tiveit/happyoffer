@@ -1,5 +1,5 @@
 export interface Offer {
-  id: number;
+  id: string;
   number: string;
   name: string;
   nameContactPerson: string;
@@ -87,5 +87,5 @@ export interface Offer {
   url: string;
   client: Client;
   contact?: Contact;
-  pushNotification?: boolean;
+  isBlacklisted?: boolean;
 }

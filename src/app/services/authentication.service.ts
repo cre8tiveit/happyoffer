@@ -2,13 +2,14 @@ import axios from 'axios';
 
 import { Injectable } from '@angular/core';
 import { User } from '../core/types/types';
+import { BASE_URL } from '../core/const';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
   login(email: string, password: string): Promise<User> {
-    const url = 'https://develop.my-online-offer.com/api/login';
+    const url = `${BASE_URL}login`;
     const postData = { email, password };
 
     return axios

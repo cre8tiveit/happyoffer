@@ -1,6 +1,8 @@
 <ion-header mode="ios">
   <ion-toolbar>
-    <ion-buttons slot="start"> </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
     <ion-title>Notifications per offer</ion-title>
   </ion-toolbar>
 
@@ -44,8 +46,8 @@
           <ion-toggle
             slot="end"
             color="success"
-            [(ngModel)]="offer.pushNotification"
-            (ionChange)="toggleNotification(offer)"
+            [(ngModel)]="offer.isBlacklisted"
+            (ionChange)="toggleNotification($event, offer.id)"
           ></ion-toggle>
         </div>
       </div>

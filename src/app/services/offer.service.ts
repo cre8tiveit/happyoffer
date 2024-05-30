@@ -3,23 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, from, map, throwError } from 'rxjs';
 import { Note, Offer } from '../core/types/types';
 import { BASE_URL } from '../core/const';
-import { getUser } from '../core/helpers/api.helper';
+import { getConfig, getUser } from '../core/helpers/api.helper';
 import { format } from 'date-fns';
 @Injectable({
   providedIn: 'root',
 })
 export class OfferService {
   getOffers(): Observable<Offer[]> {
-    const user = getUser();
-    const token = user?.token || '';
-
     const url = `${BASE_URL}offers`;
-    const config = {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
+    const config = getConfig();
 
     return from(axios.get(url, config)).pipe(
       map((response) => {
@@ -40,6 +32,8 @@ export class OfferService {
               totalOfferPriceOnce: offer.attributes.total_offer_price_once,
               totalOfferPriceRepeat: offer.attributes.total_offer_price_repeat,
               url: offer.attributes.url,
+              pushNotification:
+                offer.relationships.notification.is_push_notification === '1',
               client: {
                 name: offer.relationships.client.company_name,
                 websiteUrl: offer.relationships.client.website_url,
@@ -66,15 +60,8 @@ export class OfferService {
   }
 
   getOffer(id: string): Observable<Offer> {
-    const user = getUser();
-    const token = user?.token || '';
     const url = `${BASE_URL}offers/${id}`;
-    const config = {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
+    const config = getConfig();
 
     return from(axios.get(url, config)).pipe(
       map((response) => {
@@ -117,17 +104,9 @@ export class OfferService {
     );
   }
 
-  getNotes(offerId: number): Observable<Note[]> {
-    const user = getUser();
-    const token = user?.token || '';
-
+  getNotes(offerId: string): Observable<Note[]> {
     const url = `${BASE_URL}offers/${offerId}/notes`;
-    const config = {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
+    const config = getConfig();
 
     return from(axios.get(url, config)).pipe(
       map((response) => {

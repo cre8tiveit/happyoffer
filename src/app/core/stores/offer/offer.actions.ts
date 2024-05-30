@@ -61,5 +61,5 @@ export class GetOffers {
 
 export class GetNotes {
   public static readonly type = '[Client] Get notes';
-  constructor(public id: number) {}
+  constructor(public id: string) {}
 }

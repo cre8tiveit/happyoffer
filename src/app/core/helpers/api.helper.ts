@@ -6,8 +6,8 @@ export const getUser = (): User => {
   return { token, company: user?.company };
 };
 
-export const getConfig = (user: User): any => {
-  const token = user?.token || '';
+export const getConfig = (): any => {
+  const { token } = getUser();
 
   const config = {
     headers: {

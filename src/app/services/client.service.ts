@@ -54,9 +54,8 @@ export class ClientService {
   }
 
   updateClient(client: Client): void {
-    const user = getUser();
     const url = `${BASE_URL}clients/${client.id}`;
-    const config = getConfig(user);
+    const config = getConfig();
 
     const updatedData = {
       company_name: client.name,
@@ -76,7 +75,7 @@ export class ClientService {
   addClient(client: Client): Promise<void> {
     const user = getUser();
     const url = `${BASE_URL}clients`;
-    const config = getConfig(user);
+    const config = getConfig();
 
     const updatedData = {
       company_id: user?.company?.id,

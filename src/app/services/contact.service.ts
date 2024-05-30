@@ -14,7 +14,7 @@ export class ContactService {
   update(contact: Contact): void {
     const user = getUser();
     const url = `${BASE_URL}contacts/${contact.id}`;
-    const config = getConfig(user);
+    const config = getConfig();
     const { firstname, lastname, email, phoneNumber, emailConfirmation } =
       contact;
     const updatedData = {
@@ -30,7 +30,7 @@ export class ContactService {
   add(clientId: number, contact: Contact): void {
     const user = getUser();
     const url = `${BASE_URL}contacts/${clientId}/store`;
-    const config = getConfig(user);
+    const config = getConfig();
     const {
       firstname,
       lastname,

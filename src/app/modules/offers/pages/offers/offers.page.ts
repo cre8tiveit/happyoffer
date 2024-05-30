@@ -21,6 +21,9 @@ export class OffersPage implements OnInit {
   public isFilterVisible = false;
   public offers: Offer[] = [];
   public filteredOffers: Offer[] = [];
+  public filterStartDate = new Date().toISOString().split('T')[0];
+  public filterEndDate = new Date().toISOString().split('T')[0];
+  private filterStatusses: Set<string> = new Set();
 
   constructor(
     private readonly router: Router,
@@ -30,7 +33,7 @@ export class OffersPage implements OnInit {
 
   ngOnInit(): void {
     this.offers$.subscribe((offers) => {
-      this.offers = (offers.data as Offer[])
+      this.offers = offers.data as Offer[];
       this.filteredOffers = this.offers;
     });
   }
@@ -41,6 +44,23 @@ export class OffersPage implements OnInit {
   }
 
   public toggleFilter() {
+    this.filteredOffers = this.offers.filter((offer: Offer) => {
+      const offerDate = this.convertDateFormat(offer.offerDate.split(' ')[0]);
+      console.log('offerStatus', offer.offerStatus);
+      return (
+        offerDate >= this.filterStartDate &&
+        offerDate <= this.filterEndDate &&
+        this.filterStatusses.has(offer.offerStatus)
+      );
+    });
+
+    this.isFilterVisible = !this.isFilterVisible;
+  }
+
+  public resetFilter() {
+    this.filterStartDate = new Date().toISOString().split('T')[0];
+    this.filterEndDate = new Date().toISOString().split('T')[0];
+    this.filteredOffers = this.offers;
     this.isFilterVisible = !this.isFilterVisible;
   }
 
@@ -49,7 +69,7 @@ export class OffersPage implements OnInit {
       component: ClientsPage,
     });
     modal.present();
-    const { data, role } = await modal.onWillDismiss();
+    await modal.onWillDismiss();
   }
 
   public search($event: any) {
@@ -59,5 +79,22 @@ export class OffersPage implements OnInit {
         offer.client.name.toLowerCase().includes(value.toLowerCase()) ||
         offer.name.toLowerCase().includes(value.toLowerCase())
     );
+  }
+
+  public toggleFilterStatus(status: string) {
+    if (this.filterStatusses.has(status)) {
+      this.filterStatusses.delete(status);
+    } else {
+      this.filterStatusses.add(status);
+    }
+  }
+
+  public getFilterStatus(status: string): boolean {
+    return this.filterStatusses.has(status);
+  }
+
+  private convertDateFormat(dateString: string): string {
+    const [day, month, year] = dateString.split('-');
+    return `${year}-${month}-${day}`;
   }
 }
