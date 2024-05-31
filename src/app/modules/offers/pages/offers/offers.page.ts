@@ -24,6 +24,7 @@ export class OffersPage implements OnInit {
   public filterStartDate = new Date().toISOString().split('T')[0];
   public filterEndDate = new Date().toISOString().split('T')[0];
   private filterStatusses: Set<string> = new Set();
+  private selectedClients: Set<number> = new Set();
 
   constructor(
     private readonly router: Router,
@@ -46,7 +47,6 @@ export class OffersPage implements OnInit {
   public toggleFilter() {
     this.filteredOffers = this.offers.filter((offer: Offer) => {
       const offerDate = this.convertDateFormat(offer.offerDate.split(' ')[0]);
-      console.log('offerStatus', offer.offerStatus);
       return (
         offerDate >= this.filterStartDate &&
         offerDate <= this.filterEndDate &&
@@ -54,6 +54,10 @@ export class OffersPage implements OnInit {
       );
     });
 
+    this.filteredOffers = this.filteredOffers.filter((offer: Offer) => {
+      const id = offer.client.id || 0;
+      return this.selectedClients.has(id);
+    });
     this.isFilterVisible = !this.isFilterVisible;
   }
 
@@ -67,9 +71,14 @@ export class OffersPage implements OnInit {
   async openModal() {
     const modal = await this.modalCtrl.create({
       component: ClientsPage,
+      componentProps: {
+        selectedClients: this.selectedClients,
+      },
     });
     modal.present();
-    await modal.onWillDismiss();
+    modal.onDidDismiss().then((data) => {
+      this.selectedClients = data.data.clients;
+    });
   }
 
   public search($event: any) {

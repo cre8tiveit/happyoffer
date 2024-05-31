@@ -1,42 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { ClientState } from 'src/app/core/stores/offer/client.state';
+import { OfferState } from 'src/app/core/stores/offer/offer.state';
+import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
+import { Client, Offer } from 'src/app/core/types/types';
 
 @Component({
   selector: 'app-clients',
   templateUrl: 'clients.page.html',
   styleUrls: ['clients.page.scss'],
 })
-export class ClientsPage {
-  public clients: any[] = [
-    { id: 1, name: 'Company 1' },
-    { id: 2, name: 'Company 2' },
-    { id: 3, name: 'Company 3' },
-    { id: 4, name: 'Company 4' },
-    { id: 5, name: 'Company 5' },
-  ];
+export class ClientsPage implements OnInit {
+  @Select(ClientState.clients) public readonly clients$: Observable<
+    StateDataObject<Client[]>
+  >;
 
-  public filterdClients: any[] = this.clients;
+  constructor(private readonly modalCtrl: ModalController) {}
 
-  constructor(private readonly router: Router) {}
+  public clients: Client[] = [];
+  private selectedClients: Set<number> = new Set();
 
-  public search(event: any): void {
-    const query = event.target.value.toLowerCase();
-    this.filterdClients = this.clients.filter((client) =>
-      client.name.toLowerCase().includes(query)
-    );
+  ngOnInit(): void {
+    this.clients$.subscribe((clients) => {
+      this.clients = clients.data as Client[];
+      this.clients = this.clients.map((client) => {
+        return {
+          ...client,
+          checked: client.id ? this.selectedClients.has(+client.id) : false,
+        };
+      });
+    });
   }
 
-  public showCompanyDetails(company: any): void {
-    console.log(company);
-    this.router.navigate(['clients/edit']);
+  public toggleClient(id: number) {
+    if (this.selectedClients.has(+id)) {
+      this.selectedClients.delete(+id);
+    } else {
+      this.selectedClients.add(+id);
+    }
   }
 
-  public addClient(): void {
-    console.log('Add client');
-    this.router.navigate(['clients/add']);
-  }
-
-  public goHome(): void {
-    this.router.navigate(['/home']);
+  public close(): void {
+    const data = { clients: this.selectedClients };
+    this.modalCtrl.dismiss(data);
   }
 }

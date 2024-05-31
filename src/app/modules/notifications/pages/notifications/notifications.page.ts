@@ -30,7 +30,6 @@ export class NotificationsPage implements OnInit {
   }
 
   public delete(id: number): void {
-    console.log('delete', id);
     this.store.dispatch(new DeleteNotification(id));
   }
 

@@ -23,7 +23,7 @@ export class ClientPage implements OnInit {
   myForm: FormGroup = {} as FormGroup;
   title = '';
   editMode = false;
-  toastMessage = '';  
+  toastMessage = '';
 
   validations = {
     name: [{ type: 'required', message: 'Username is required.' }],
@@ -118,10 +118,10 @@ export class ClientPage implements OnInit {
         console.log('Client updated', this.toastMessage);
         this.store.dispatch(new EditClient(client));
       } else {
-         this.toastMessage = 'Client successfully added.';
+        this.toastMessage = 'Client successfully added.';
         this.store.dispatch(new AddClient(client));
       }
       this.navController.back();
-    } 
+    }
   }
 }

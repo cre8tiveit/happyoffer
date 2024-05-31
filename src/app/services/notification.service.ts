@@ -66,7 +66,7 @@ export class NotificationService {
   }
 
   turnOffNotificationForOffer(id: string): void {
-    const url = `${BASE_URL}notifications`;
+    const url = `${BASE_URL}notifications/blacklist`;
     const config = getConfig();
     const data = {
       offer_id: id,
@@ -75,12 +75,21 @@ export class NotificationService {
   }
 
   turnOnNotificationForOffer(id: string): void {
-    const url = `${BASE_URL}notifications/${id}`;
+    const url = `${BASE_URL}notifications/blacklist/${id}`;
     const config = getConfig();
     axios.delete(url, config);
   }
 
-  getBlacklistedOffers(): String[] {
-    return ['56'];
+  getBlacklistedOffers(): Observable<String[]> {
+    const url = `${BASE_URL}blacklisted`;
+    const config = getConfig();
+    return from(axios.get(url, config)).pipe(
+      map((response) => {
+        const blacklistedOffers = response.data.data.map(
+          (blacklisted: any) => '' + blacklisted.offer_id
+        );
+        return blacklistedOffers as String[];
+      })
+    );
   }
 }

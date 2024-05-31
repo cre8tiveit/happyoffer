@@ -25,16 +25,19 @@ export class OffersNotificationPage implements OnInit {
     this.offers$.subscribe((offers) => {
       this.offers = offers.data as Offer[];
 
-      const blacklistedOffers = this.notificationService.getBlacklistedOffers();
-      const updatedOffers = this.offers.map((offer) => {
-        return {
-          ...offer,
-          isBlacklisted: blacklistedOffers.includes(offer.id),
-        };
-      });
+      this.notificationService
+        .getBlacklistedOffers()
+        .subscribe((blacklistedOffers) => {
+          const updatedOffers = this.offers.map((offer) => {
+            return {
+              ...offer,
+              isBlacklisted: !blacklistedOffers.includes(offer.id),
+            };
+          });
 
-      this.offers = updatedOffers;
-      this.filteredOffers = this.offers;
+          this.offers = updatedOffers;
+          this.filteredOffers = this.offers;
+        });
     });
   }
 

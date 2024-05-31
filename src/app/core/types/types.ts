@@ -22,6 +22,7 @@ export interface Client {
   websiteUrl: string;
   logo?: string;
   deletedAt?: string;
+  checked?: boolean;
 }
 
 export interface Contact {

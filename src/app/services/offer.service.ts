@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, from, map, throwError } from 'rxjs';
+import { Observable, catchError, from, identity, map, throwError } from 'rxjs';
 import { Note, Offer } from '../core/types/types';
 import { BASE_URL } from '../core/const';
-import { getConfig, getUser } from '../core/helpers/api.helper';
+import { getConfig } from '../core/helpers/api.helper';
 import { format } from 'date-fns';
 @Injectable({
   providedIn: 'root',
@@ -35,6 +35,7 @@ export class OfferService {
               pushNotification:
                 offer.relationships.notification.is_push_notification === '1',
               client: {
+                id: offer.relationships.client.id,
                 name: offer.relationships.client.company_name,
                 websiteUrl: offer.relationships.client.website_url,
                 email: offer.relationships.client.email,
@@ -83,6 +84,7 @@ export class OfferService {
               totalOfferPriceRepeat: offer.attributes.total_offer_price_repeat,
               url: offer.attributes.url,
               client: {
+                id: offer.relationships.client.id,
                 name: offer.relationships.client.company_name,
                 websiteUrl: offer.relationships.client.website_url,
                 email: offer.relationships.client.email,

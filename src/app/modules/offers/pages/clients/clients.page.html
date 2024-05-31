@@ -5,10 +5,23 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <ion-list>
-    @for (client of filterdClients; track client.id) {
-    <ion-item (click)="showCompanyDetails(client)" detail>
+    @for (client of clients; track client.id) {
+    <ion-item>
+      <ion-checkbox
+        class="mt-2"
+        (ionChange)="toggleClient(client.id ||1)"
+        [checked]="client.checked"
+        slot="start"
+      ></ion-checkbox>
       <ion-label>{{client.name}}</ion-label>
     </ion-item>
     }
   </ion-list>
 </ion-content>
+<ion-footer>
+  <div class="mx-5 mb-5">
+    <ion-button expand="block" shape="rounded" (click)="close()"
+      >Select</ion-button
+    >
+  </div>
+</ion-footer>
