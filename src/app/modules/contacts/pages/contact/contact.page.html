@@ -6,7 +6,7 @@
     <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-toast
     trigger="open-toast"
     [message]="toastMessage"
@@ -21,7 +21,9 @@
         labelPlacement="floating"
         id="firstname"
         type="text"
+        color="dark"
         formControlName="firstname"
+        mode="ios"
       />
     </div>
 
@@ -44,6 +46,7 @@
         labelPlacement="floating"
         id="lastname"
         type="text"
+        mode="ios"
         formControlName="lastname"
       />
     </div>
@@ -67,6 +70,7 @@
         labelPlacement="floating"
         id="phonenumber"
         type="text"
+        mode="ios"
         formControlName="phonenumber"
       />
     </div>
@@ -105,6 +109,7 @@
         id="email"
         type="text"
         formControlName="email"
+        mode="ios"
       />
     </div>
 
@@ -125,6 +130,7 @@
       <ion-input
         label="email confirmation"
         labelPlacement="floating"
+        mode="ios"
         id="emailconfirmation"
         type="text"
         formControlName="emailConfirmation"
@@ -149,13 +155,19 @@
         label="note"
         labelPlacement="floating"
         id="note"
+        mode="ios"
         formControlName="note"
         rows="5"
       />
     </div>
 
     <div class="mt-10" id="open-toast">
-      <ion-button type="submit" expand="full" color="primary" shape="round"
+      <ion-button
+        type="submit"
+        expand="full"
+        color="primary"
+        shape="round"
+        [disabled]="!contactForm.valid"
         >Save</ion-button
       >
     </div>

@@ -1,4 +1,4 @@
-<ion-header mode="ios">
+<ion-header class="solid-header" mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button text="Back"></ion-back-button>
@@ -13,7 +13,7 @@
 
   <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-list>
     @for (client of filterdClients; track client.id) {
     <ion-item (click)="showClientDetails(client)" detail>

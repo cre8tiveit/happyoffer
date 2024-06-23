@@ -17,3 +17,13 @@ export const getConfig = (): any => {
   };
   return config;
 };
+
+export const getOfferUrl = (url: string): string => {
+  if (url.includes('draft')) {
+    return url;
+  }
+  const parts = url.split('/offer/');
+  const draft = parts[0] + '/offer/draft/' + parts[1];
+
+  return draft;
+};

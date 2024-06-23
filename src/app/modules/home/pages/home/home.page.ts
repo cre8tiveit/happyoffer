@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { NavController } from '@ionic/angular';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { NotificationState } from 'src/app/core/stores/offer/notification.state';
 import { GetNotificationsCount } from 'src/app/core/stores/offer/offer.actions';
@@ -77,30 +77,37 @@ export class HomePage implements OnInit {
   ];
 
   constructor(
-    private readonly router: Router,
-    private readonly navController: NavController
+    private readonly navController: NavController,
+    private store: Store
   ) {}
-
   ngOnInit(): void {
-    this.notificationsCount$.subscribe((notificationsCount) => {
-      this.notificationsCount = notificationsCount.data as NotificationCount;
-      this.items[3].badge = this.notificationsCount.count;
-    });
+    this.updateNotificationsCount();
+    this.store.dispatch(new GetNotificationsCount());
+  }
 
-    this.isAndroid = Capacitor.getPlatform() === 'android';
-    this.isIos = Capacitor.getPlatform() === 'ios';
-    this.isWeb = Capacitor.getPlatform() === 'web';
-    this.items = this.items.map((item) => {
-      const classes = `${item.background}`;
-      const updatedItem = {
-        ...item,
-        classes,
-      };
-      return updatedItem;
-    });
+  ionViewWillEnter(): void {
+    this.store.dispatch(new GetNotificationsCount());
   }
 
   public navigate(url: string): void {
     this.navController.navigateForward(url);
+  }
+
+  updateNotificationsCount(): void {
+    this.notificationsCount$.subscribe((notificationsCount) => {
+      this.notificationsCount = notificationsCount.data as NotificationCount;
+      this.items[3].badge = this.notificationsCount.count;
+      this.isAndroid = Capacitor.getPlatform() === 'android';
+      this.isIos = Capacitor.getPlatform() === 'ios';
+      this.isWeb = Capacitor.getPlatform() === 'web';
+      this.items = this.items.map((item) => {
+        const classes = `${item.background}`;
+        const updatedItem = {
+          ...item,
+          classes,
+        };
+        return updatedItem;
+      });
+    });
   }
 }

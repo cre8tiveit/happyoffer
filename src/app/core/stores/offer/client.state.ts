@@ -58,14 +58,20 @@ export class ClientState implements OnDestroy {
     { client }: AddClient
   ) {
     const currentClients = getState().clients?.data || [];
-    const updatedClients: Client[] = [...currentClients, client];
-    this.clientService.addClient(client);
 
-    patchState({
-      clients: {
-        ...getState().clients,
-        data: updatedClients,
-      },
+    this.clientService.addClient(client).then((response: any) => {
+      const id = response.data['data']['id'];
+      const updateClient = {
+        ...client,
+        id,
+      };
+      const updatedClients: Client[] = [...currentClients, updateClient];
+      patchState({
+        clients: {
+          ...getState().clients,
+          data: updatedClients,
+        },
+      });
     });
   }
 

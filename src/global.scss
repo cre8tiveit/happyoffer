@@ -70,3 +70,27 @@ div.push {
 ion-tab-button.tab-selected ng-icon {
     color: #ffd31d;
 }
+
+.solid-header {
+    --background: #ffffff;
+}
+
+
+a {
+    color: blue;
+    text-decoration: underline;
+    background-color: transparent;
+    cursor: pointer;
+   
+}
+
+a:hover {
+    text-decoration: underline;
+    color: red;
+}
+
+a:visited {
+    color: purple;
+
+}
+

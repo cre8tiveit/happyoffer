@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Injectable } from '@angular/core';
 
 import { Observable, catchError, from, map, throwError } from 'rxjs';
-import { Notification, NotificationCount } from '../core/types/types';
+import { Notification, NotificationCount, PostNote } from '../core/types/types';
 import { getConfig } from '../core/helpers/api.helper';
 import { BASE_URL } from '../core/const';
 import { format } from 'date-fns';
@@ -47,9 +47,7 @@ export class NotificationService {
 
   getNotificationCount(): Observable<NotificationCount> {
     const url = `${BASE_URL}notifications/count`;
-    const config = getConfig();
-
-    return from(axios.get(url, config)).pipe(
+    return from(axios.get(url, getConfig())).pipe(
       map((response) => {
         return {
           count: response.data.data.notification_count,
@@ -61,23 +59,25 @@ export class NotificationService {
 
   deleteNotification(id: number): void {
     const url = `${BASE_URL}notifications/${id}`;
-    const config = getConfig();
-    axios.delete(url, config);
+    axios.delete(url, getConfig());
+  }
+
+  addNotification(note: PostNote): Promise<any> {
+    const url = `${BASE_URL}notes`;
+    return axios.post(url, note, getConfig());
   }
 
   turnOffNotificationForOffer(id: string): void {
     const url = `${BASE_URL}notifications/blacklist`;
-    const config = getConfig();
     const data = {
       offer_id: id,
     };
-    axios.post(url, data, config);
+    axios.post(url, data, getConfig());
   }
 
   turnOnNotificationForOffer(id: string): void {
     const url = `${BASE_URL}notifications/blacklist/${id}`;
-    const config = getConfig();
-    axios.delete(url, config);
+    axios.delete(url, getConfig());
   }
 
   getBlacklistedOffers(): Observable<String[]> {

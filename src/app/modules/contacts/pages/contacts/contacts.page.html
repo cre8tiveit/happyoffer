@@ -18,7 +18,7 @@
   ></ion-searchbar>
   }
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content>
   @if (contacts.length !== 0) {
   <ion-list>
     @for (contact of filteredContacts; track contact.id) {

@@ -11,7 +11,7 @@
     placeholder="search clients"
   ></ion-searchbar>
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-list>
     @for (client of filterdClients; track client.id) {
     <ion-item detail (click)="goContacts(client)"

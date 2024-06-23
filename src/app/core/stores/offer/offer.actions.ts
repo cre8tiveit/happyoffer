@@ -1,4 +1,4 @@
-import { Client, Contact } from '../../types/types';
+import { Client, Contact, PostNote } from '../../types/types';
 
 export class GetClients {
   public static readonly type = '[Client] Get clients';
@@ -62,4 +62,14 @@ export class GetOffers {
 export class GetNotes {
   public static readonly type = '[Client] Get notes';
   constructor(public id: string) {}
+}
+
+export class AddNote {
+  public static readonly type = '[Client] Add note';
+  constructor(public postNote: PostNote) {}
+}
+
+export class DeleteNote {
+  public static readonly type = '[Client] Delete note';
+  constructor(public id: number) {}
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, from, identity, map, throwError } from 'rxjs';
 import { Note, Offer } from '../core/types/types';
 import { BASE_URL } from '../core/const';
-import { getConfig } from '../core/helpers/api.helper';
+import { getConfig, getOfferUrl } from '../core/helpers/api.helper';
 import { format } from 'date-fns';
 @Injectable({
   providedIn: 'root',
@@ -31,7 +31,7 @@ export class OfferService {
               offerType: offer.attributes.offer_type,
               totalOfferPriceOnce: offer.attributes.total_offer_price_once,
               totalOfferPriceRepeat: offer.attributes.total_offer_price_repeat,
-              url: offer.attributes.url,
+              url: getOfferUrl(offer.attributes.url),
               pushNotification:
                 offer.relationships.notification.is_push_notification === '1',
               client: {
@@ -82,7 +82,7 @@ export class OfferService {
               offerType: offer.attributes.offer_type,
               totalOfferPriceOnce: offer.attributes.total_offer_price_once,
               totalOfferPriceRepeat: offer.attributes.total_offer_price_repeat,
-              url: offer.attributes.url,
+              url: getOfferUrl(offer.attributes.url),
               client: {
                 id: offer.relationships.client.id,
                 name: offer.relationships.client.company_name,
@@ -102,7 +102,10 @@ export class OfferService {
 
         return offers[0];
       }),
-      catchError((error) => throwError(() => error))
+      catchError((error) => {
+        console.log('error', error);
+        return throwError(() => error);
+      })
     );
   }
 
@@ -120,13 +123,17 @@ export class OfferService {
               is_push_notification: note.attributes.is_push_notification,
               type: note.attributes.type,
               message: note.attributes.message,
+              createdAt: note.attributes.created_at,
               isDeletedApp: note.attributes.is_deleted_app,
               isCreatedAt: note.attributes.is_created_at,
               isUpdatedAt: note.attributes.is_updated_at,
             } as any)
         );
 
-        return notes;
+        return (notes as Note[]).sort(
+          (a, b) =>
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
       }),
       catchError((error) => throwError(() => error))
     );

@@ -2,3 +2,12 @@ ion-toolbar {
   --background: #ffd31d;
   --border-color: #ffd31d;
 }
+
+.ion-valid, .ion-untouched, .ion-dirty {
+  caret-color: black;
+}
+
+ion-textearea {
+  --highlight-color-focused: black;
+  --highlight-color-valid: black;
+}

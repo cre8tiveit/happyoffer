@@ -8,10 +8,12 @@ import { NotificationsPage } from './pages/notifications/notifications.page';
 import { heroHomeSolid } from '@ng-icons/heroicons/solid';
 import { NgIconsModule } from '@ng-icons/core';
 import { OfferPage } from './pages/offer/offer.page';
+import { NotesPage } from '../offers/pages/notes/notes.page';
 
 const routes: Routes = [
   { path: '', component: NotificationsPage },
   { path: 'offer/:id', component: OfferPage },
+  { path: 'notes/:id', component: NotesPage },
 ];
 
 @NgModule({

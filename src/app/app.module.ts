@@ -23,6 +23,7 @@ import { ClientState } from './core/stores/offer/client.state';
 import { NotificationState } from './core/stores/offer/notification.state';
 import { LoggingState } from './core/stores/offer/logging.state';
 import { ContactState } from './core/stores/offer/contact.state';
+import { StatusBadgeComponent } from './modules/shared/components/status-badge/status-badge.component';
 
 @NgModule({
   declarations: [AppComponent, TabsComponent],

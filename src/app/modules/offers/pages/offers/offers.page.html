@@ -103,7 +103,7 @@
   ></ion-searchbar>
   }
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-list>
     @for ( offer of filteredOffers; track offer.id) {
     <div
@@ -112,20 +112,7 @@
     >
       <div class="flex justify-between items-center">
         <div>{{ offer.offerNumber }}</div>
-        <div>
-          @if(offer.offerStatus === 'Not Yet Send') {<ion-badge color="open"
-            >Open</ion-badge
-          >} @if(offer.offerStatus === 'Opened') {<ion-badge color="tertiary"
-            >Opened</ion-badge
-          >
-          } @if(offer.offerStatus === 'Accepted') {<ion-badge color="success"
-            >Accepted</ion-badge
-          >
-          } @if(offer.offerStatus === 'Rejected') {<ion-badge color="danger"
-            >Rejected</ion-badge
-          >
-          }
-        </div>
+        <app-status-badge [offer]="offer"></app-status-badge>
       </div>
       <div class="font-bold">{{ offer.name }}</div>
       <div class="flex justify-between items-center">

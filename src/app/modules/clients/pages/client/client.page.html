@@ -7,14 +7,14 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-   <ion-toast
+  <ion-toast
     trigger="open-toast"
     [message]="toastMessage"
     [duration]="5000"
     color="success"
     position="top"
   />
-  <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="mx-5">
+  <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" class="mx-5">
     <div class="mt-5 border border-1 border-black px-2 rounded-md">
       <ion-input
         label="Client name"
@@ -22,13 +22,16 @@
         id="name"
         type="text"
         formControlName="name"
+        mode="ios"
       />
     </div>
 
-    <div *ngIf="myForm.get('name')?.errors && myForm.get('name')?.touched">
+    <div
+      *ngIf="clientForm.get('name')?.errors && clientForm.get('name')?.touched"
+    >
       <ng-container *ngFor="let validation of validations.name">
         <div
-          *ngIf="myForm.get('name')?.hasError(validation.type)"
+          *ngIf="clientForm.get('name')?.hasError(validation.type)"
           class="text-red-600"
         >
           {{ validation.message }}
@@ -43,15 +46,16 @@
         id="Zipcode"
         type="text"
         formControlName="zipcode"
+        mode="ios"
       />
     </div>
 
     <div
-      *ngIf="myForm.get('zipcode')?.errors && myForm.get('zipcode')?.touched"
+      *ngIf="clientForm.get('zipcode')?.errors && clientForm.get('zipcode')?.touched"
     >
       <ng-container *ngFor="let validation of validations.zipcode">
         <div
-          *ngIf="myForm.get('zipcode')?.hasError(validation.type)"
+          *ngIf="clientForm.get('zipcode')?.hasError(validation.type)"
           class="text-red-600"
         >
           {{ validation.message }}
@@ -66,14 +70,15 @@
         id="address"
         type="text"
         formControlName="address"
+        mode="ios"
       />
     </div>
     <div
-      *ngIf="myForm.get('address')?.errors && myForm.get('address')?.touched"
+      *ngIf="clientForm.get('address')?.errors && clientForm.get('address')?.touched"
     >
       <ng-container *ngFor="let validation of validations.address">
         <div
-          *ngIf="myForm.get('name')?.hasError(validation.type)"
+          *ngIf="clientForm.get('name')?.hasError(validation.type)"
           class="text-red-600"
         >
           {{ validation.message }}
@@ -88,13 +93,16 @@
         id="number"
         type="text"
         formControlName="number"
+        mode="ios"
       />
     </div>
 
-    <div *ngIf="myForm.get('number')?.errors && myForm.get('number')?.touched">
+    <div
+      *ngIf="clientForm.get('number')?.errors && clientForm.get('number')?.touched"
+    >
       <ng-container *ngFor="let validation of validations.number">
         <div
-          *ngIf="myForm.get('number')?.hasError(validation.type)"
+          *ngIf="clientForm.get('number')?.hasError(validation.type)"
           class="text-red-600"
         >
           {{ validation.message }}
@@ -109,14 +117,15 @@
         id="country"
         type="text"
         formControlName="country"
+        mode="ios"
       />
     </div>
     <div
-      *ngIf="myForm.get('country')?.errors && myForm.get('country')?.touched"
+      *ngIf="clientForm.get('country')?.errors && clientForm.get('country')?.touched"
     >
       <ng-container *ngFor="let validation of validations.country">
         <div
-          *ngIf="myForm.get('country')?.hasError(validation.type)"
+          *ngIf="clientForm.get('country')?.hasError(validation.type)"
           class="text-red-600"
         >
           {{ validation.message }}
@@ -131,12 +140,15 @@
         id="city"
         type="text"
         formControlName="city"
+        mode="ios"
       />
     </div>
-    <div *ngIf="myForm.get('city')?.errors && myForm.get('city')?.touched">
+    <div
+      *ngIf="clientForm.get('city')?.errors && clientForm.get('city')?.touched"
+    >
       <ng-container *ngFor="let validation of validations.city">
         <div
-          *ngIf="myForm.get('city')?.hasError(validation.type)"
+          *ngIf="clientForm.get('city')?.hasError(validation.type)"
           class="text-red-600"
         >
           {{ validation.message }}
@@ -151,12 +163,15 @@
         id="email"
         type="text"
         formControlName="email"
+        mode="ios"
       />
     </div>
-    <div *ngIf="myForm.get('email')?.errors && myForm.get('email')?.touched">
+    <div
+      *ngIf="clientForm.get('email')?.errors && clientForm.get('email')?.touched"
+    >
       <ng-container *ngFor="let validation of validations.email">
         <div
-          *ngIf="myForm.get('email')?.hasError(validation.type)"
+          *ngIf="clientForm.get('email')?.hasError(validation.type)"
           class="text-red-600"
         >
           {{ validation.message }}
@@ -170,13 +185,16 @@
         labelPlacement="floating"
         id="cocn"
         type="text"
+        mode="ios"
         formControlName="cocn"
       />
     </div>
-    <div *ngIf="myForm.get('cocn')?.errors && myForm.get('cocn')?.touched">
+    <div
+      *ngIf="clientForm.get('cocn')?.errors && clientForm.get('cocn')?.touched"
+    >
       <ng-container *ngFor="let validation of validations.cocn">
         <div
-          *ngIf="myForm.get('cocn')?.hasError(validation.type)"
+          *ngIf="clientForm.get('cocn')?.hasError(validation.type)"
           class="text-red-600"
         >
           {{ validation.message }}
@@ -190,15 +208,16 @@
         labelPlacement="floating"
         id="phonenumber"
         type="text"
+        mode="ios"
         formControlName="phonenumber"
       />
     </div>
     <div
-      *ngIf="myForm.get('phonenumber')?.errors && myForm.get('phonenumber')?.touched"
+      *ngIf="clientForm.get('phonenumber')?.errors && clientForm.get('phonenumber')?.touched"
     >
       <ng-container *ngFor="let validation of validations.phonenumber">
         <div
-          *ngIf="myForm.get('phonenumber')?.hasError(validation.type)"
+          *ngIf="clientForm.get('phonenumber')?.hasError(validation.type)"
           class="text-red-600"
         >
           {{ validation.message }}
@@ -212,13 +231,16 @@
         labelPlacement="floating"
         id="url"
         type="text"
+        mode="ios"
         formControlName="url"
       />
     </div>
-    <div *ngIf="myForm.get('url')?.errors && myForm.get('url')?.touched">
+    <div
+      *ngIf="clientForm.get('url')?.errors && clientForm.get('url')?.touched"
+    >
       <ng-container *ngFor="let validation of validations.url">
         <div
-          *ngIf="myForm.get('url')?.hasError(validation.type)"
+          *ngIf="clientForm.get('url')?.hasError(validation.type)"
           class="text-red-600"
         >
           {{ validation.message }}
@@ -226,7 +248,13 @@
       </ng-container>
     </div>
     <div class="my-10">
-      <ion-button type="submit" expand="full" shape="round" color="primary" id="open-toast"
+      <ion-button
+        type="submit"
+        expand="full"
+        shape="round"
+        color="primary"
+        id="open-toast"
+        [disabled]="!clientForm.valid"
         >Save</ion-button
       >
     </div>

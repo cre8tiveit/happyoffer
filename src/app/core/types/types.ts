@@ -1,3 +1,5 @@
+import { SafeHtml } from '@angular/platform-browser';
+
 export interface Offer {
   id: string;
   number: string;
@@ -50,10 +52,19 @@ export interface Notification {
 export interface Note {
   id: number;
   message: string;
+  safeMessage?: SafeHtml;
   createdAt: string;
   updatedAt: Date;
   offerId: number;
   createdBy: string;
+}
+
+export interface PostNote {
+  is_push_notification: boolean;
+  type: string;
+  message: string;
+  offer_id: number;
+  is_deleted_app: boolean;
 }
 
 export interface NotificationCount {

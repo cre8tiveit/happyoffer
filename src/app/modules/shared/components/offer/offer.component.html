@@ -1,0 +1,92 @@
+<ion-toast
+  trigger="open-toast"
+  [message]="toastMessage"
+  [duration]="2000"
+  position="top"
+/>
+<div class="mx-5 pt-5" *ngIf="offer">
+  <div class="flex justify-between items-center mt-2">
+    <div class="font-bold">{{ offer.offerNumber }}</div>
+    <app-status-badge [offer]="offer"></app-status-badge>
+  </div>
+
+  <div class="mt-3">
+    <ion-label class="font-bold">Offer name</ion-label>
+    <div class="bg-gray-100 rounded-md text-ellipsis p-2">
+      {{ offer.name }}
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <ion-label class="font-bold">Contact</ion-label>
+    <div class="bg-gray-100 rounded-md text-ellipsis p-2">
+      {{ offer.contact?.firstname }} {{ offer.contact?.lastname }}
+    </div>
+  </div>
+  <div></div>
+
+  <div class="mt-2">
+    <ion-label class="font-bold">Client</ion-label>
+    <div class="bg-gray-100 rounded-md text-ellipsis p-2">
+      {{ offer.client.name }}
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <ion-label class="font-bold">Offer URL</ion-label>
+  </div>
+
+  <div class="text-nowrap max-w-3/4 bg-gray-100 rounded-md text-ellipsis p-2">
+    {{ getOfferUrl().substring(0, 45) }}
+  </div>
+
+  <ion-button
+    id="open-toast"
+    color="primary"
+    size="small"
+    class="mt-2"
+    shape="round"
+    (click)="copyUrl()"
+    >Copy</ion-button
+  >
+
+  <div class="grid grid-cols-2 gap-4 mt-5">
+    <ion-button expand="full" color="light"
+      ><a href="tel:{{ offer.contact?.phoneNumber }}"
+        >Call mobile</a
+      ></ion-button
+    >
+
+    <ion-button expand="full" color="light"
+      ><a href="tel:{{ offer.client.phone }}">Call</a></ion-button
+    >
+
+    <ion-button
+      expand="full"
+      color="light"
+      (click)="openWhatsApp(offer.client.phone)"
+      >Whatsapp</ion-button
+    >
+    <ion-button expand="full" color="light" (click)="openWebsite()"
+      >Website</ion-button
+    >
+  </div>
+  <ion-button
+    expand="full"
+    color="warning"
+    class="mt-5"
+    shape="round"
+    (click)="goNotes()"
+  >
+    Notes & Logging</ion-button
+  >
+  <ion-button
+    expand="full"
+    color="success"
+    class="mt-5"
+    shape="round"
+    (click)="showOffer()"
+  >
+    Visit offer</ion-button
+  >
+</div>

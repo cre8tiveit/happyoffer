@@ -20,7 +20,7 @@ export class ClientPage implements OnInit {
   @Input()
   public client: Client | undefined;
 
-  myForm: FormGroup = {} as FormGroup;
+  clientForm: FormGroup = {} as FormGroup;
   title = '';
   editMode = false;
   toastMessage = '';
@@ -61,7 +61,7 @@ export class ClientPage implements OnInit {
   ngOnInit(): void {
     this.client = this.dataService.getData();
     this.editMode = this.router.url.includes('edit');
-    this.myForm = this.fb.group({
+    this.clientForm = this.fb.group({
       name: [this.editMode ? this.client?.name : '', [Validators.required]],
       address: [
         this.editMode ? this.client?.address : '',
@@ -82,12 +82,15 @@ export class ClientPage implements OnInit {
       ],
       cocn: [
         this.editMode ? this.client?.chamberOfCommerce : '',
-        [Validators.required, Validators.pattern('^[0-9]*$')],
+        [Validators.pattern('^[0-9]*$')],
       ],
-      phonenumber: [this.client?.phone, [Validators.required]],
+      phonenumber: [
+        this.editMode ? this.client?.phone : '',
+        [Validators.required],
+      ],
       url: [
         this.editMode ? this.client?.websiteUrl : '',
-        [Validators.required, Validators.pattern('https?://.+')],
+        [Validators.pattern('https?://.+')],
       ],
       number: [
         this.editMode ? this.client?.houseNumber : '',
@@ -99,23 +102,22 @@ export class ClientPage implements OnInit {
   }
 
   public async onSubmit() {
-    if (this.myForm.valid) {
+    if (this.clientForm.valid) {
       const client: Client = {
         id: this.client?.id,
-        name: this.myForm.value.name,
-        email: this.myForm.value.email,
-        phone: this.myForm.value.phonenumber,
-        address: this.myForm.value.address,
-        houseNumber: this.myForm.value.number,
-        city: this.myForm.value.city,
-        zip: this.myForm.value.zipcode,
-        chamberOfCommerce: this.myForm.value.cocn,
-        country: this.myForm.value.country,
-        websiteUrl: this.myForm.value.url,
+        name: this.clientForm.value.name,
+        email: this.clientForm.value.email,
+        phone: this.clientForm.value.phonenumber,
+        address: this.clientForm.value.address,
+        houseNumber: this.clientForm.value.number,
+        city: this.clientForm.value.city,
+        zip: this.clientForm.value.zipcode,
+        chamberOfCommerce: this.clientForm.value.cocn,
+        country: this.clientForm.value.country,
+        websiteUrl: this.clientForm.value.url,
       };
       if (this.editMode) {
         this.toastMessage = 'Client updated successfully.';
-        console.log('Client updated', this.toastMessage);
         this.store.dispatch(new EditClient(client));
       } else {
         this.toastMessage = 'Client successfully added.';

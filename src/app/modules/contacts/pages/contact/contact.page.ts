@@ -109,8 +109,6 @@ export class ContactPage implements OnInit {
   ];
 
   public onSubmit() {
-    const clientId = this.dataService.getData().clientId;
-
     if (this.contactForm.valid) {
       const contact: Contact = {
         id: this.contact.id,
@@ -127,6 +125,8 @@ export class ContactPage implements OnInit {
         this.toastMessage = 'Contact updated successfully.';
         this.store.dispatch(new EditContact(contact));
       } else {
+        const clientId = this.dataService.getData().clientId;
+
         this.toastMessage = 'Contact successfully added.';
         this.store.dispatch(new AddContact(clientId, contact));
       }

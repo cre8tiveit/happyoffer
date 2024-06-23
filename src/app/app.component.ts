@@ -11,8 +11,10 @@ import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { OfferService } from './services/offer.service';
 
+interface OfferData {
+  offer_id: number;
+}
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -29,9 +31,9 @@ export class AppComponent implements OnInit {
       });
 
       FirebaseMessaging.addListener('notificationActionPerformed', (event) => {
-        console.log('notificationActionPerformed: ', { event });
-
-        this.router.navigate(['/offers/17']);
+        const data = event.notification.data as OfferData;
+        const offerId = data['offer_id'];
+        this.router.navigate([`/offers/${offerId}`]);
       });
 
       this.store.dispatch(new GetClients());

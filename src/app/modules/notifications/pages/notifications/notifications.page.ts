@@ -3,7 +3,10 @@ import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, of, tap } from 'rxjs';
 import { NotificationState } from 'src/app/core/stores/offer/notification.state';
-import { DeleteNotification } from 'src/app/core/stores/offer/offer.actions';
+import {
+  DeleteNotification,
+  GetNotifications,
+} from 'src/app/core/stores/offer/offer.actions';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 import { Notification } from 'src/app/core/types/types';
 
@@ -27,6 +30,11 @@ export class NotificationsPage implements OnInit {
     this.notifications$.subscribe((notifications) => {
       this.notifications = notifications.data as Notification[];
     });
+    this.store.dispatch(new GetNotifications());
+  }
+
+  ionViewWillEnter(): void {
+    this.store.dispatch(new GetNotifications());
   }
 
   public delete(id: number): void {
