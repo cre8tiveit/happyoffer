@@ -8,6 +8,7 @@ import { AddNote, DeleteNotification, GetNotifications } from './offer.actions';
 import { inspectStatus } from '../../helpers/rxjs.helper';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Notification, NotificationCount } from '../../types/types';
+import { Badge } from '@capawesome/capacitor-badge';
 
 export interface NotificationStateModel {
   notifications: StateDataObject<Notification[]>;
@@ -64,7 +65,16 @@ export class NotificationState implements OnDestroy {
     return this.notificationService.getNotificationCount().pipe(
       filter((notificationsCount) => !!notificationsCount),
       inspectStatus(),
-      tap((result) => patchState({ count: result })),
+      tap(async (result) => {
+        const count = result.data?.count || 0;
+        if (count > 0) {
+          Badge.set({ count });
+        } else {
+          Badge.clear();
+        }
+
+        patchState({ count: result });
+      }),
       takeUntil(this._unsubscribe)
     );
   }
@@ -79,6 +89,7 @@ export class NotificationState implements OnDestroy {
     const updatedNotifications = currentNotifications.filter(
       (notification) => notification.id !== id
     );
+    Badge.decrease();
     patchState({
       notifications: {
         ...getState().notifications,

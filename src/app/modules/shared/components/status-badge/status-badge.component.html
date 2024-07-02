@@ -1,12 +1,20 @@
-@if(offer.offerStatus === 'Not Yet Send') {<ion-badge color="open"
+@if(offer.offerStatus === 'Not Yet Send') {<ion-badge
+  color="light"
+  class="w-[5rem]"
   >Open</ion-badge
->} @if(offer.offerStatus === 'Opened') {<ion-badge color="tertiary"
+>} @if(offer.offerStatus === 'Opened') {<ion-badge
+  color="tertiary"
+  class="w-[5rem]"
   >Opened</ion-badge
 >
-} @if(offer.offerStatus === 'Accepted') {<ion-badge color="success"
+} @if(offer.offerStatus === 'Accepted') {<ion-badge
+  color="success"
+  class="w-[5rem]"
   >Accepted</ion-badge
 >
-} @if(offer.offerStatus === 'Rejected') {<ion-badge color="danger"
+} @if(offer.offerStatus === 'Rejected') {<ion-badge
+  color="danger"
+  class="w-[5rem]"
   >Rejected</ion-badge
 >
 }

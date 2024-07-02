@@ -3,7 +3,10 @@ import { Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ClientState } from 'src/app/core/stores/offer/client.state';
-import { GetContacts } from 'src/app/core/stores/offer/offer.actions';
+import {
+  GetClients,
+  GetContacts,
+} from 'src/app/core/stores/offer/offer.actions';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 import { Client } from 'src/app/core/types/types';
 import { DataService } from 'src/app/services/data.service';
@@ -51,5 +54,10 @@ export class ClientsPage implements OnInit {
     this.dataService.setData({ clientId: id, clientName: name });
     this.store.dispatch(new GetContacts(id));
     this.router.navigate([`/contacts/client/${id}`]);
+  }
+
+  public handleRefresh(event: any): void {
+    this.store.dispatch(new GetClients());
+    event.target.complete();
   }
 }

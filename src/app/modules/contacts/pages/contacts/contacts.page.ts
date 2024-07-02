@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ContactState } from 'src/app/core/stores/offer/contact.state';
+import { GetContacts } from 'src/app/core/stores/offer/offer.actions';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 import { Contact } from 'src/app/core/types/types';
 import { DataService } from 'src/app/services/data.service';
@@ -25,7 +26,8 @@ export class ContactsPage implements OnInit {
   constructor(
     private readonly router: Router,
     private route: ActivatedRoute,
-    private readonly dataService: DataService
+    private readonly dataService: DataService,
+    private readonly store: Store
   ) {}
   ngOnInit(): void {
     const { clientId, clientName } = this.dataService.getData();
@@ -67,5 +69,10 @@ export class ContactsPage implements OnInit {
         contact.firstname.toLowerCase().includes(query) ||
         contact.lastname.toLowerCase().includes(query)
     );
+  }
+
+  public handleRefresh(event: any): void {
+    this.store.dispatch(new GetContacts(+this.clientId));
+    event.target.complete();
   }
 }

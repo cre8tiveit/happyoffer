@@ -40,6 +40,7 @@ export class OfferService {
                 websiteUrl: offer.relationships.client.website_url,
                 email: offer.relationships.client.email,
                 logo: offer.relationships.client.logo,
+                phone: offer.relationships.client.phone_number,
               },
               contact: {
                 firstname: offer.relationships.contact.firstname,
@@ -60,7 +61,7 @@ export class OfferService {
     );
   }
 
-  getOffer(id: string): Observable<Offer> {
+  getOffer(id: number): Observable<Offer> {
     const url = `${BASE_URL}offers/${id}`;
     const config = getConfig();
 
@@ -111,28 +112,28 @@ export class OfferService {
 
   getNotes(offerId: string): Observable<Note[]> {
     const url = `${BASE_URL}offers/${offerId}/notes`;
-    const config = getConfig();
-
-    return from(axios.get(url, config)).pipe(
+    return from(axios.get(url, getConfig())).pipe(
       map((response) => {
-        const notes = response.data.data.map(
-          (note: any) =>
-            ({
-              id: note.id,
-              createdBy: note.attributes.created_by,
-              is_push_notification: note.attributes.is_push_notification,
-              type: note.attributes.type,
-              message: note.attributes.message,
-              createdAt: note.attributes.created_at,
-              isDeletedApp: note.attributes.is_deleted_app,
-              isCreatedAt: note.attributes.is_created_at,
-              isUpdatedAt: note.attributes.is_updated_at,
-            } as any)
-        );
+        const notes = response.data.data
+          .filter((note: any) => note.attributes.is_deleted_app === 0)
+          .map(
+            (note: any) =>
+              ({
+                id: note.id,
+                createdBy: note.attributes.created_by,
+                is_push_notification: note.attributes.is_push_notification,
+                type: note.attributes.type,
+                message: note.attributes.message,
+                createdAt: note.attributes.created_at,
+                isDeletedApp: note.attributes.is_deleted_app === 1,
+                isCreatedAt: note.attributes.is_created_at,
+                isUpdatedAt: note.attributes.is_updated_at,
+              } as any)
+          );
 
         return (notes as Note[]).sort(
           (a, b) =>
-            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
       }),
       catchError((error) => throwError(() => error))

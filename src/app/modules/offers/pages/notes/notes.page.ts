@@ -4,7 +4,11 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { AddNote, DeleteNote } from 'src/app/core/stores/offer/offer.actions';
+import {
+  AddNote,
+  DeleteNote,
+  GetNotes,
+} from 'src/app/core/stores/offer/offer.actions';
 import { OfferState } from 'src/app/core/stores/offer/offer.state';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 import { Note, PostNote } from 'src/app/core/types/types';
@@ -71,5 +75,6 @@ export class NotesPage implements OnInit {
     await toast.present();
     this.note = '';
     this.store.dispatch(new AddNote(postNote));
+    this.store.dispatch(new GetNotes('' + this.offerId));
   }
 }

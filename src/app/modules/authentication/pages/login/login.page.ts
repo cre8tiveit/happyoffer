@@ -43,6 +43,8 @@ export class LoginPage implements OnInit {
   public async login(): Promise<void> {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
+    const isDemo = email.includes('demo_');
+    localStorage.setItem('isDemo', isDemo.toString());
     this.authenticationService
       .login(email, password)
       .then((user) => {

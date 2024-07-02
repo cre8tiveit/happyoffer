@@ -1,3 +1,4 @@
+import { BASE_DEMO_URL, BASE_URL } from '../const';
 import { User } from '../types/types';
 
 export const getUser = (): User => {
@@ -16,6 +17,11 @@ export const getConfig = (): any => {
     },
   };
   return config;
+};
+
+export const getBaseUrl = (): string => {
+  const isDemo = localStorage.getItem('isDemo') === 'true';
+  return isDemo ? BASE_DEMO_URL : BASE_URL;
 };
 
 export const getOfferUrl = (url: string): string => {

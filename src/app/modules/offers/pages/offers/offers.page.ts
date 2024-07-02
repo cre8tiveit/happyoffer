@@ -6,8 +6,9 @@ import { Offer } from 'src/app/core/types/types';
 import { OfferState } from 'src/app/core/stores/offer/offer.state';
 import { Observable } from 'rxjs';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { DataService } from 'src/app/services/data.service';
+import { GetOffers } from 'src/app/core/stores/offer/offer.actions';
 
 @Component({
   selector: 'app-offers',
@@ -29,7 +30,8 @@ export class OffersPage implements OnInit {
   constructor(
     private readonly router: Router,
     private modalCtrl: ModalController,
-    private readonly dataService: DataService
+    private readonly dataService: DataService,
+    private readonly store: Store
   ) {}
 
   ngOnInit(): void {
@@ -100,6 +102,11 @@ export class OffersPage implements OnInit {
 
   public getFilterStatus(status: string): boolean {
     return this.filterStatusses.has(status);
+  }
+
+  public handleRefresh(event: any): void {
+    this.store.dispatch(new GetOffers());
+    event.target.complete();
   }
 
   private convertDateFormat(dateString: string): string {

@@ -99,15 +99,18 @@
   } @if (!isFilterVisible) {
   <ion-searchbar
     (ionInput)="search($event)"
-    placeholder="search offers"
+    placeholder="Search"
   ></ion-searchbar>
   }
 </ion-header>
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     @for ( offer of filteredOffers; track offer.id) {
     <div
-      class="px-5 py-2 even:bg-gray-200 border-b border-gray-300"
+      class="px-5 py-2 even:bg-gray-100 border-b border-gray-100"
       (click)="showDetails(offer)"
     >
       <div class="flex justify-between items-center">

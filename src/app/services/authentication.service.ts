@@ -3,13 +3,14 @@ import axios from 'axios';
 import { Injectable } from '@angular/core';
 import { User } from '../core/types/types';
 import { BASE_URL } from '../core/const';
+import { getBaseUrl } from '../core/helpers/api.helper';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
   login(email: string, password: string): Promise<User> {
-    const url = `${BASE_URL}login`;
+    const url = `${getBaseUrl()}login`;
     const postData = { email, password };
 
     return axios

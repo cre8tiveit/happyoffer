@@ -6,6 +6,7 @@ import { NotificationState } from 'src/app/core/stores/offer/notification.state'
 import {
   DeleteNotification,
   GetNotifications,
+  GetNotificationsCount,
 } from 'src/app/core/stores/offer/offer.actions';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 import { Notification } from 'src/app/core/types/types';
@@ -39,9 +40,16 @@ export class NotificationsPage implements OnInit {
 
   public delete(id: number): void {
     this.store.dispatch(new DeleteNotification(id));
+    this.store.dispatch(new GetNotificationsCount());
   }
 
   public showOffer(offerId: number): void {
     this.navController.navigateForward(`notifications/offer/${offerId}`);
+  }
+
+  public handleRefresh(event: any): void {
+    this.store.dispatch(new GetNotifications());
+    this.store.dispatch(new GetNotificationsCount());
+    event.target.complete();
   }
 }

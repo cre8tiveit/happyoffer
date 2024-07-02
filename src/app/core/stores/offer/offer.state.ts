@@ -46,7 +46,6 @@ export class OfferState implements OnDestroy {
   }: StateContext<OfferStateModel>): Observable<StateDataObject<Offer[]>> {
     return this.offerService.getOffers().pipe(
       filter((offers) => !!offers),
-
       inspectStatus(),
       tap((result) => patchState({ offers: result })),
       takeUntil(this._unsubscribe)
@@ -74,7 +73,6 @@ export class OfferState implements OnDestroy {
     const currentNotifications = getState().notes?.data || [];
     const result = await this.notificationService.addNotification(postNote);
     const notificationId = result.data.data.id;
-    console.log(notificationId);
     const note = result.data.data.attributes;
     const notification: Note = {
       id: notificationId,
@@ -83,6 +81,7 @@ export class OfferState implements OnDestroy {
       offerId: note.offer_id,
       createdAt: note.created_at,
       updatedAt: note.updated_at,
+      isDeletedApp: note.is_deleted_app === 1,
     };
 
     const updatedNotifications = [...currentNotifications, notification];

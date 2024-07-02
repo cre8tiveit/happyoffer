@@ -14,12 +14,15 @@
   @if (contacts.length !== 0) {
   <ion-searchbar
     (ionInput)="search($event)"
-    placeholder="search"
+    placeholder="Search"
   ></ion-searchbar>
   }
 </ion-header>
 <ion-content>
-  @if (contacts.length !== 0) {
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list>
     @for (contact of filteredContacts; track contact.id) {
     <ion-item detail (click)="goContact(contact)"
@@ -29,7 +32,4 @@
     >
     }
   </ion-list>
-  } @else {
-  <div class="mt-10 flex justify-center">There are no contacts yet</div>
-  }
 </ion-content>

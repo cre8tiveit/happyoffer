@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { ClientState } from 'src/app/core/stores/offer/client.state';
 
@@ -9,6 +9,7 @@ import { StateDataObject } from 'src/app/core/types/store/state-data-object.type
 import { Client } from 'src/app/core/types/types';
 import { ClientPage } from '../client/client.page';
 import { DataService } from 'src/app/services/data.service';
+import { GetClients } from 'src/app/core/stores/offer/offer.actions';
 
 @Component({
   selector: 'app-clients',
@@ -30,7 +31,8 @@ export class ClientsPage implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly dataService: DataService,
-    private readonly modalCtrl: ModalController
+    private readonly modalCtrl: ModalController,
+    private readonly store: Store
   ) {}
 
   ngOnInit(): void {
@@ -69,5 +71,10 @@ export class ClientsPage implements OnInit {
 
     if (role === 'confirm') {
     }
+  }
+
+  public handleRefresh(event: any): void {
+    this.store.dispatch(new GetClients());
+    event.target.complete();
   }
 }

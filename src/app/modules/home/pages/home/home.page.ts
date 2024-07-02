@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
+import { Badge } from '@capawesome/capacitor-badge';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -61,7 +62,7 @@ export class HomePage implements OnInit {
       background: 'bg-primary',
       activeBackground: 'bg-primary',
       icon: 'heroBellAlert',
-      badge: 1,
+      badge: 0,
       url: '/notifications',
       classes: '',
     },
@@ -80,6 +81,7 @@ export class HomePage implements OnInit {
     private readonly navController: NavController,
     private store: Store
   ) {}
+
   ngOnInit(): void {
     this.updateNotificationsCount();
     this.store.dispatch(new GetNotificationsCount());
@@ -94,9 +96,11 @@ export class HomePage implements OnInit {
   }
 
   updateNotificationsCount(): void {
-    this.notificationsCount$.subscribe((notificationsCount) => {
+    this.notificationsCount$.subscribe(async (notificationsCount) => {
       this.notificationsCount = notificationsCount.data as NotificationCount;
-      this.items[3].badge = this.notificationsCount.count;
+      this.items[3].badge = this.notificationsCount?.count;
+      const isSupported = await Badge.isSupported();
+
       this.isAndroid = Capacitor.getPlatform() === 'android';
       this.isIos = Capacitor.getPlatform() === 'ios';
       this.isWeb = Capacitor.getPlatform() === 'web';

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { Injectable } from '@angular/core';
 
-import { getConfig, getUser } from '../core/helpers/api.helper';
+import { getConfig } from '../core/helpers/api.helper';
 import { BASE_URL } from '../core/const';
 
 @Injectable({

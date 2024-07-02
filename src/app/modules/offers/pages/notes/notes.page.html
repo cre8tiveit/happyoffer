@@ -12,7 +12,11 @@
       <ion-textarea [(ngModel)]="note" color="dark" mode="ios"></ion-textarea>
     </div>
 
-    <ion-button expand="full" color="primary" (click)="addNote()"
+    <ion-button
+      expand="full"
+      color="primary"
+      (click)="addNote()"
+      [disabled]="note.length === 0"
       >Add note</ion-button
     >
   </div>

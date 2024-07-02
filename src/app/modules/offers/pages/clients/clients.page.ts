@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ClientState } from 'src/app/core/stores/offer/client.state';
+import { GetClients } from 'src/app/core/stores/offer/offer.actions';
 import { OfferState } from 'src/app/core/stores/offer/offer.state';
 import { StateDataObject } from 'src/app/core/types/store/state-data-object.type';
 import { Client, Offer } from 'src/app/core/types/types';
@@ -18,7 +19,10 @@ export class ClientsPage implements OnInit {
     StateDataObject<Client[]>
   >;
 
-  constructor(private readonly modalCtrl: ModalController) {}
+  constructor(
+    private readonly modalCtrl: ModalController,
+    private store: Store
+  ) {}
 
   public clients: Client[] = [];
   private selectedClients: Set<number> = new Set();

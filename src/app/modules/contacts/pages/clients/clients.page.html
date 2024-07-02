@@ -3,15 +3,21 @@
     <ion-buttons slot="start">
       <ion-back-button text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>Clients</ion-title>
+    <ion-title>Contacts</ion-title>
   </ion-toolbar>
 
   <ion-searchbar
     (ionInput)="search($event)"
-    placeholder="search clients"
+    placeholder="Search"
   ></ion-searchbar>
+  <div class="text-gray-400 mx-5 mb-2">
+    Please first select the client before you can see the contacts.
+  </div>
 </ion-header>
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     @for (client of filterdClients; track client.id) {
     <ion-item detail (click)="goContacts(client)"

@@ -57,6 +57,7 @@ export interface Note {
   updatedAt: Date;
   offerId: number;
   createdBy: string;
+  isDeletedApp: boolean;
 }
 
 export interface PostNote {

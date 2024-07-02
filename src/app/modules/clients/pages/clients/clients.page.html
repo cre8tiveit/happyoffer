@@ -11,9 +11,15 @@
     </ion-buttons>
   </ion-toolbar>
 
-  <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
+  <ion-searchbar
+    (ionInput)="search($event)"
+    placeholder="Search"
+  ></ion-searchbar>
 </ion-header>
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     @for (client of filterdClients; track client.id) {
     <ion-item (click)="showClientDetails(client)" detail>
